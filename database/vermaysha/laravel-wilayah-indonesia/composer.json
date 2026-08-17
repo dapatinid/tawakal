@@ -1,0 +1,71 @@
+{
+    "name": "vermaysha/laravel-wilayah-indonesia",
+    "description": "Data Wilayah Administrasi Indonesia yang disusun ulang berdasarkan Provinsi, Kabupaten, Kecamatan dan Desa",
+    "keywords": [
+        "vermaysha",
+        "laravel",
+        "laravel-wilayah-indonesia"
+    ],
+    "homepage": "https://github.com/vermaysha/laravel-wilayah-indonesia",
+    "readme": "https://github.com/vermaysha/laravel-wilayah-indonesia#readme",
+    "type": "library",
+    "license": "LGPL-2.1-only",
+    "authors": [
+        {
+            "name": "Ashary Vermaysha",
+            "email": "vermaysha@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.1|^8.2|^8.3",
+        "spatie/laravel-package-tools": "^1.16.0",
+        "illuminate/contracts": "^10.0|^11.0"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.14",
+        "nunomaduro/collision": "^7.9|^8.1",
+        "nunomaduro/larastan": "^1.0|^2.0.1",
+        "orchestra/testbench": "^8.0|^9.0",
+        "pestphp/pest": "^2.0",
+        "pestphp/pest-plugin-laravel": "^2.0",
+        "phpstan/extension-installer": "^1.1",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.0",
+        "spatie/laravel-ray": "^1.26"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vermaysha\\Wilayah\\": "src",
+            "Vermaysha\\Wilayah\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vermaysha\\Wilayah\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
+        "analyse": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/pest",
+        "test-coverage": "vendor/bin/pest --coverage",
+        "format": "vendor/bin/pint"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "phpstan/extension-installer": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vermaysha\\Wilayah\\ServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
