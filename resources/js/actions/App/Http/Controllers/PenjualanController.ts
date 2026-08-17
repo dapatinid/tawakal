@@ -303,7 +303,7 @@ store.form = storeForm
 * @see app/Http/Controllers/PenjualanController.php:1417
 * @route '/penjualan/{order}/print'
 */
-export const print = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const print = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: print.url(args, options),
     method: 'get',
 })
@@ -318,7 +318,7 @@ print.definition = {
 * @see app/Http/Controllers/PenjualanController.php:1417
 * @route '/penjualan/{order}/print'
 */
-print.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+print.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -351,7 +351,7 @@ print.url = (args: { order: number | { id: number } } | [order: number | { id: n
 * @see app/Http/Controllers/PenjualanController.php:1417
 * @route '/penjualan/{order}/print'
 */
-print.get = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+print.get = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: print.url(args, options),
     method: 'get',
 })
@@ -361,7 +361,7 @@ print.get = (args: { order: number | { id: number } } | [order: number | { id: n
 * @see app/Http/Controllers/PenjualanController.php:1417
 * @route '/penjualan/{order}/print'
 */
-print.head = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+print.head = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: print.url(args, options),
     method: 'head',
 })
@@ -371,7 +371,7 @@ print.head = (args: { order: number | { id: number } } | [order: number | { id: 
 * @see app/Http/Controllers/PenjualanController.php:1417
 * @route '/penjualan/{order}/print'
 */
-const printForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const printForm = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: print.url(args, options),
     method: 'get',
 })
@@ -381,7 +381,7 @@ const printForm = (args: { order: number | { id: number } } | [order: number | {
 * @see app/Http/Controllers/PenjualanController.php:1417
 * @route '/penjualan/{order}/print'
 */
-printForm.get = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+printForm.get = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: print.url(args, options),
     method: 'get',
 })
@@ -391,7 +391,7 @@ printForm.get = (args: { order: number | { id: number } } | [order: number | { i
 * @see app/Http/Controllers/PenjualanController.php:1417
 * @route '/penjualan/{order}/print'
 */
-printForm.head = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+printForm.head = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: print.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -408,7 +408,7 @@ print.form = printForm
 * @see app/Http/Controllers/PenjualanController.php:387
 * @route '/penjualan/{order}'
 */
-export const show = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -423,7 +423,7 @@ show.definition = {
 * @see app/Http/Controllers/PenjualanController.php:387
 * @route '/penjualan/{order}'
 */
-show.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+show.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -456,7 +456,7 @@ show.url = (args: { order: number | { id: number } } | [order: number | { id: nu
 * @see app/Http/Controllers/PenjualanController.php:387
 * @route '/penjualan/{order}'
 */
-show.get = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -466,7 +466,7 @@ show.get = (args: { order: number | { id: number } } | [order: number | { id: nu
 * @see app/Http/Controllers/PenjualanController.php:387
 * @route '/penjualan/{order}'
 */
-show.head = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -476,7 +476,7 @@ show.head = (args: { order: number | { id: number } } | [order: number | { id: n
 * @see app/Http/Controllers/PenjualanController.php:387
 * @route '/penjualan/{order}'
 */
-const showForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const showForm = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -486,7 +486,7 @@ const showForm = (args: { order: number | { id: number } } | [order: number | { 
 * @see app/Http/Controllers/PenjualanController.php:387
 * @route '/penjualan/{order}'
 */
-showForm.get = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.get = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -496,7 +496,7 @@ showForm.get = (args: { order: number | { id: number } } | [order: number | { id
 * @see app/Http/Controllers/PenjualanController.php:387
 * @route '/penjualan/{order}'
 */
-showForm.head = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.head = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -513,7 +513,7 @@ show.form = showForm
 * @see app/Http/Controllers/PenjualanController.php:405
 * @route '/penjualan/{order}/editinfo'
 */
-export const editInfo = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const editInfo = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: editInfo.url(args, options),
     method: 'put',
 })
@@ -528,7 +528,7 @@ editInfo.definition = {
 * @see app/Http/Controllers/PenjualanController.php:405
 * @route '/penjualan/{order}/editinfo'
 */
-editInfo.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+editInfo.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -561,7 +561,7 @@ editInfo.url = (args: { order: number | { id: number } } | [order: number | { id
 * @see app/Http/Controllers/PenjualanController.php:405
 * @route '/penjualan/{order}/editinfo'
 */
-editInfo.put = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+editInfo.put = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: editInfo.url(args, options),
     method: 'put',
 })
@@ -571,7 +571,7 @@ editInfo.put = (args: { order: number | { id: number } } | [order: number | { id
 * @see app/Http/Controllers/PenjualanController.php:405
 * @route '/penjualan/{order}/editinfo'
 */
-const editInfoForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const editInfoForm = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: editInfo.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -586,7 +586,7 @@ const editInfoForm = (args: { order: number | { id: number } } | [order: number 
 * @see app/Http/Controllers/PenjualanController.php:405
 * @route '/penjualan/{order}/editinfo'
 */
-editInfoForm.put = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+editInfoForm.put = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: editInfo.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -603,7 +603,7 @@ editInfo.form = editInfoForm
 * @see app/Http/Controllers/PenjualanController.php:148
 * @route '/penjualan/{order}'
 */
-export const destroy = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -618,7 +618,7 @@ destroy.definition = {
 * @see app/Http/Controllers/PenjualanController.php:148
 * @route '/penjualan/{order}'
 */
-destroy.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -651,7 +651,7 @@ destroy.url = (args: { order: number | { id: number } } | [order: number | { id:
 * @see app/Http/Controllers/PenjualanController.php:148
 * @route '/penjualan/{order}'
 */
-destroy.delete = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -661,7 +661,7 @@ destroy.delete = (args: { order: number | { id: number } } | [order: number | { 
 * @see app/Http/Controllers/PenjualanController.php:148
 * @route '/penjualan/{order}'
 */
-const destroyForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -676,7 +676,7 @@ const destroyForm = (args: { order: number | { id: number } } | [order: number |
 * @see app/Http/Controllers/PenjualanController.php:148
 * @route '/penjualan/{order}'
 */
-destroyForm.delete = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -693,7 +693,7 @@ destroy.form = destroyForm
 * @see app/Http/Controllers/PenjualanController.php:435
 * @route '/penjualan/{order}/item'
 */
-export const storeItem = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const storeItem = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: storeItem.url(args, options),
     method: 'post',
 })
@@ -708,7 +708,7 @@ storeItem.definition = {
 * @see app/Http/Controllers/PenjualanController.php:435
 * @route '/penjualan/{order}/item'
 */
-storeItem.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+storeItem.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -741,7 +741,7 @@ storeItem.url = (args: { order: number | { id: number } } | [order: number | { i
 * @see app/Http/Controllers/PenjualanController.php:435
 * @route '/penjualan/{order}/item'
 */
-storeItem.post = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+storeItem.post = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: storeItem.url(args, options),
     method: 'post',
 })
@@ -751,7 +751,7 @@ storeItem.post = (args: { order: number | { id: number } } | [order: number | { 
 * @see app/Http/Controllers/PenjualanController.php:435
 * @route '/penjualan/{order}/item'
 */
-const storeItemForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const storeItemForm = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: storeItem.url(args, options),
     method: 'post',
 })
@@ -761,7 +761,7 @@ const storeItemForm = (args: { order: number | { id: number } } | [order: number
 * @see app/Http/Controllers/PenjualanController.php:435
 * @route '/penjualan/{order}/item'
 */
-storeItemForm.post = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+storeItemForm.post = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: storeItem.url(args, options),
     method: 'post',
 })
@@ -773,7 +773,7 @@ storeItem.form = storeItemForm
 * @see app/Http/Controllers/PenjualanController.php:485
 * @route '/item-penjualan/{item}'
 */
-export const updateItem = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const updateItem = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updateItem.url(args, options),
     method: 'put',
 })
@@ -788,7 +788,7 @@ updateItem.definition = {
 * @see app/Http/Controllers/PenjualanController.php:485
 * @route '/item-penjualan/{item}'
 */
-updateItem.url = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+updateItem.url = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { item: args }
     }
@@ -821,7 +821,7 @@ updateItem.url = (args: { item: number | { id: number } } | [item: number | { id
 * @see app/Http/Controllers/PenjualanController.php:485
 * @route '/item-penjualan/{item}'
 */
-updateItem.put = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+updateItem.put = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updateItem.url(args, options),
     method: 'put',
 })
@@ -831,7 +831,7 @@ updateItem.put = (args: { item: number | { id: number } } | [item: number | { id
 * @see app/Http/Controllers/PenjualanController.php:485
 * @route '/item-penjualan/{item}'
 */
-const updateItemForm = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateItemForm = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateItem.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -846,7 +846,7 @@ const updateItemForm = (args: { item: number | { id: number } } | [item: number 
 * @see app/Http/Controllers/PenjualanController.php:485
 * @route '/item-penjualan/{item}'
 */
-updateItemForm.put = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateItemForm.put = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateItem.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -863,7 +863,7 @@ updateItem.form = updateItemForm
 * @see app/Http/Controllers/PenjualanController.php:686
 * @route '/item-penjualan/{item}'
 */
-export const destroyItem = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroyItem = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyItem.url(args, options),
     method: 'delete',
 })
@@ -878,7 +878,7 @@ destroyItem.definition = {
 * @see app/Http/Controllers/PenjualanController.php:686
 * @route '/item-penjualan/{item}'
 */
-destroyItem.url = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroyItem.url = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { item: args }
     }
@@ -911,7 +911,7 @@ destroyItem.url = (args: { item: number | { id: number } } | [item: number | { i
 * @see app/Http/Controllers/PenjualanController.php:686
 * @route '/item-penjualan/{item}'
 */
-destroyItem.delete = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroyItem.delete = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyItem.url(args, options),
     method: 'delete',
 })
@@ -921,7 +921,7 @@ destroyItem.delete = (args: { item: number | { id: number } } | [item: number | 
 * @see app/Http/Controllers/PenjualanController.php:686
 * @route '/item-penjualan/{item}'
 */
-const destroyItemForm = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyItemForm = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroyItem.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -936,7 +936,7 @@ const destroyItemForm = (args: { item: number | { id: number } } | [item: number
 * @see app/Http/Controllers/PenjualanController.php:686
 * @route '/item-penjualan/{item}'
 */
-destroyItemForm.delete = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyItemForm.delete = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroyItem.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -953,7 +953,7 @@ destroyItem.form = destroyItemForm
 * @see app/Http/Controllers/PenjualanController.php:806
 * @route '/penjualan/{order}/biayalain'
 */
-export const biayaLain = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const biayaLain = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: biayaLain.url(args, options),
     method: 'put',
 })
@@ -968,7 +968,7 @@ biayaLain.definition = {
 * @see app/Http/Controllers/PenjualanController.php:806
 * @route '/penjualan/{order}/biayalain'
 */
-biayaLain.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+biayaLain.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -1001,7 +1001,7 @@ biayaLain.url = (args: { order: number | { id: number } } | [order: number | { i
 * @see app/Http/Controllers/PenjualanController.php:806
 * @route '/penjualan/{order}/biayalain'
 */
-biayaLain.put = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+biayaLain.put = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: biayaLain.url(args, options),
     method: 'put',
 })
@@ -1011,7 +1011,7 @@ biayaLain.put = (args: { order: number | { id: number } } | [order: number | { i
 * @see app/Http/Controllers/PenjualanController.php:806
 * @route '/penjualan/{order}/biayalain'
 */
-const biayaLainForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const biayaLainForm = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: biayaLain.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -1026,7 +1026,7 @@ const biayaLainForm = (args: { order: number | { id: number } } | [order: number
 * @see app/Http/Controllers/PenjualanController.php:806
 * @route '/penjualan/{order}/biayalain'
 */
-biayaLainForm.put = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+biayaLainForm.put = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: biayaLain.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -1043,7 +1043,7 @@ biayaLain.form = biayaLainForm
 * @see app/Http/Controllers/PenjualanController.php:841
 * @route '/penjualan/{order}/pembayaran'
 */
-export const storePayment = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const storePayment = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: storePayment.url(args, options),
     method: 'post',
 })
@@ -1058,7 +1058,7 @@ storePayment.definition = {
 * @see app/Http/Controllers/PenjualanController.php:841
 * @route '/penjualan/{order}/pembayaran'
 */
-storePayment.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+storePayment.url = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { order: args }
     }
@@ -1091,7 +1091,7 @@ storePayment.url = (args: { order: number | { id: number } } | [order: number | 
 * @see app/Http/Controllers/PenjualanController.php:841
 * @route '/penjualan/{order}/pembayaran'
 */
-storePayment.post = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+storePayment.post = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: storePayment.url(args, options),
     method: 'post',
 })
@@ -1101,7 +1101,7 @@ storePayment.post = (args: { order: number | { id: number } } | [order: number |
 * @see app/Http/Controllers/PenjualanController.php:841
 * @route '/penjualan/{order}/pembayaran'
 */
-const storePaymentForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const storePaymentForm = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: storePayment.url(args, options),
     method: 'post',
 })
@@ -1111,7 +1111,7 @@ const storePaymentForm = (args: { order: number | { id: number } } | [order: num
 * @see app/Http/Controllers/PenjualanController.php:841
 * @route '/penjualan/{order}/pembayaran'
 */
-storePaymentForm.post = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+storePaymentForm.post = (args: { order: string | number | { id: string | number } } | [order: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: storePayment.url(args, options),
     method: 'post',
 })
@@ -1123,7 +1123,7 @@ storePayment.form = storePaymentForm
 * @see app/Http/Controllers/PenjualanController.php:896
 * @route '/pembayaran-penjualan/{payment}'
 */
-export const updatePayment = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const updatePayment = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updatePayment.url(args, options),
     method: 'put',
 })
@@ -1138,7 +1138,7 @@ updatePayment.definition = {
 * @see app/Http/Controllers/PenjualanController.php:896
 * @route '/pembayaran-penjualan/{payment}'
 */
-updatePayment.url = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+updatePayment.url = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { payment: args }
     }
@@ -1171,7 +1171,7 @@ updatePayment.url = (args: { payment: number | { id: number } } | [payment: numb
 * @see app/Http/Controllers/PenjualanController.php:896
 * @route '/pembayaran-penjualan/{payment}'
 */
-updatePayment.put = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+updatePayment.put = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updatePayment.url(args, options),
     method: 'put',
 })
@@ -1181,7 +1181,7 @@ updatePayment.put = (args: { payment: number | { id: number } } | [payment: numb
 * @see app/Http/Controllers/PenjualanController.php:896
 * @route '/pembayaran-penjualan/{payment}'
 */
-const updatePaymentForm = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updatePaymentForm = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updatePayment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -1196,7 +1196,7 @@ const updatePaymentForm = (args: { payment: number | { id: number } } | [payment
 * @see app/Http/Controllers/PenjualanController.php:896
 * @route '/pembayaran-penjualan/{payment}'
 */
-updatePaymentForm.put = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updatePaymentForm.put = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updatePayment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -1213,7 +1213,7 @@ updatePayment.form = updatePaymentForm
 * @see app/Http/Controllers/PenjualanController.php:989
 * @route '/pembayaran-penjualan/{payment}'
 */
-export const destroyPayment = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroyPayment = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyPayment.url(args, options),
     method: 'delete',
 })
@@ -1228,7 +1228,7 @@ destroyPayment.definition = {
 * @see app/Http/Controllers/PenjualanController.php:989
 * @route '/pembayaran-penjualan/{payment}'
 */
-destroyPayment.url = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroyPayment.url = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { payment: args }
     }
@@ -1261,7 +1261,7 @@ destroyPayment.url = (args: { payment: number | { id: number } } | [payment: num
 * @see app/Http/Controllers/PenjualanController.php:989
 * @route '/pembayaran-penjualan/{payment}'
 */
-destroyPayment.delete = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroyPayment.delete = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyPayment.url(args, options),
     method: 'delete',
 })
@@ -1271,7 +1271,7 @@ destroyPayment.delete = (args: { payment: number | { id: number } } | [payment: 
 * @see app/Http/Controllers/PenjualanController.php:989
 * @route '/pembayaran-penjualan/{payment}'
 */
-const destroyPaymentForm = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyPaymentForm = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroyPayment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -1286,7 +1286,7 @@ const destroyPaymentForm = (args: { payment: number | { id: number } } | [paymen
 * @see app/Http/Controllers/PenjualanController.php:989
 * @route '/pembayaran-penjualan/{payment}'
 */
-destroyPaymentForm.delete = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyPaymentForm.delete = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroyPayment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

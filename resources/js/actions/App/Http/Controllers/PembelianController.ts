@@ -222,7 +222,7 @@ store.form = storeForm
 * @see app/Http/Controllers/PembelianController.php:1503
 * @route '/pembelian/{purchaseOrder}/print'
 */
-export const print = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const print = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: print.url(args, options),
     method: 'get',
 })
@@ -237,7 +237,7 @@ print.definition = {
 * @see app/Http/Controllers/PembelianController.php:1503
 * @route '/pembelian/{purchaseOrder}/print'
 */
-print.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+print.url = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { purchaseOrder: args }
     }
@@ -270,7 +270,7 @@ print.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: 
 * @see app/Http/Controllers/PembelianController.php:1503
 * @route '/pembelian/{purchaseOrder}/print'
 */
-print.get = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+print.get = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: print.url(args, options),
     method: 'get',
 })
@@ -280,7 +280,7 @@ print.get = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: 
 * @see app/Http/Controllers/PembelianController.php:1503
 * @route '/pembelian/{purchaseOrder}/print'
 */
-print.head = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+print.head = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: print.url(args, options),
     method: 'head',
 })
@@ -290,7 +290,7 @@ print.head = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder:
 * @see app/Http/Controllers/PembelianController.php:1503
 * @route '/pembelian/{purchaseOrder}/print'
 */
-const printForm = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const printForm = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: print.url(args, options),
     method: 'get',
 })
@@ -300,7 +300,7 @@ const printForm = (args: { purchaseOrder: number | { id: number } } | [purchaseO
 * @see app/Http/Controllers/PembelianController.php:1503
 * @route '/pembelian/{purchaseOrder}/print'
 */
-printForm.get = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+printForm.get = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: print.url(args, options),
     method: 'get',
 })
@@ -310,7 +310,7 @@ printForm.get = (args: { purchaseOrder: number | { id: number } } | [purchaseOrd
 * @see app/Http/Controllers/PembelianController.php:1503
 * @route '/pembelian/{purchaseOrder}/print'
 */
-printForm.head = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+printForm.head = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: print.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -327,7 +327,7 @@ print.form = printForm
 * @see app/Http/Controllers/PembelianController.php:448
 * @route '/pembelian/{purchaseOrder}'
 */
-export const show = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -342,7 +342,7 @@ show.definition = {
 * @see app/Http/Controllers/PembelianController.php:448
 * @route '/pembelian/{purchaseOrder}'
 */
-show.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+show.url = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { purchaseOrder: args }
     }
@@ -375,7 +375,7 @@ show.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: n
 * @see app/Http/Controllers/PembelianController.php:448
 * @route '/pembelian/{purchaseOrder}'
 */
-show.get = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -385,7 +385,7 @@ show.get = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: n
 * @see app/Http/Controllers/PembelianController.php:448
 * @route '/pembelian/{purchaseOrder}'
 */
-show.head = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -395,7 +395,7 @@ show.head = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: 
 * @see app/Http/Controllers/PembelianController.php:448
 * @route '/pembelian/{purchaseOrder}'
 */
-const showForm = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const showForm = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -405,7 +405,7 @@ const showForm = (args: { purchaseOrder: number | { id: number } } | [purchaseOr
 * @see app/Http/Controllers/PembelianController.php:448
 * @route '/pembelian/{purchaseOrder}'
 */
-showForm.get = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.get = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -415,7 +415,7 @@ showForm.get = (args: { purchaseOrder: number | { id: number } } | [purchaseOrde
 * @see app/Http/Controllers/PembelianController.php:448
 * @route '/pembelian/{purchaseOrder}'
 */
-showForm.head = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.head = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -432,7 +432,7 @@ show.form = showForm
 * @see app/Http/Controllers/PembelianController.php:466
 * @route '/pembelian/{purchaseOrder}/editinfo'
 */
-export const editInfo = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const editInfo = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: editInfo.url(args, options),
     method: 'put',
 })
@@ -447,7 +447,7 @@ editInfo.definition = {
 * @see app/Http/Controllers/PembelianController.php:466
 * @route '/pembelian/{purchaseOrder}/editinfo'
 */
-editInfo.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+editInfo.url = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { purchaseOrder: args }
     }
@@ -480,7 +480,7 @@ editInfo.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrde
 * @see app/Http/Controllers/PembelianController.php:466
 * @route '/pembelian/{purchaseOrder}/editinfo'
 */
-editInfo.put = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+editInfo.put = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: editInfo.url(args, options),
     method: 'put',
 })
@@ -490,7 +490,7 @@ editInfo.put = (args: { purchaseOrder: number | { id: number } } | [purchaseOrde
 * @see app/Http/Controllers/PembelianController.php:466
 * @route '/pembelian/{purchaseOrder}/editinfo'
 */
-const editInfoForm = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const editInfoForm = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: editInfo.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -505,7 +505,7 @@ const editInfoForm = (args: { purchaseOrder: number | { id: number } } | [purcha
 * @see app/Http/Controllers/PembelianController.php:466
 * @route '/pembelian/{purchaseOrder}/editinfo'
 */
-editInfoForm.put = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+editInfoForm.put = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: editInfo.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -522,7 +522,7 @@ editInfo.form = editInfoForm
 * @see app/Http/Controllers/PembelianController.php:144
 * @route '/pembelian/{purchaseOrder}'
 */
-export const destroy = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -537,7 +537,7 @@ destroy.definition = {
 * @see app/Http/Controllers/PembelianController.php:144
 * @route '/pembelian/{purchaseOrder}'
 */
-destroy.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { purchaseOrder: args }
     }
@@ -570,7 +570,7 @@ destroy.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder
 * @see app/Http/Controllers/PembelianController.php:144
 * @route '/pembelian/{purchaseOrder}'
 */
-destroy.delete = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -580,7 +580,7 @@ destroy.delete = (args: { purchaseOrder: number | { id: number } } | [purchaseOr
 * @see app/Http/Controllers/PembelianController.php:144
 * @route '/pembelian/{purchaseOrder}'
 */
-const destroyForm = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -595,7 +595,7 @@ const destroyForm = (args: { purchaseOrder: number | { id: number } } | [purchas
 * @see app/Http/Controllers/PembelianController.php:144
 * @route '/pembelian/{purchaseOrder}'
 */
-destroyForm.delete = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -612,7 +612,7 @@ destroy.form = destroyForm
 * @see app/Http/Controllers/PembelianController.php:491
 * @route '/pembelian/{purchaseOrder}/item'
 */
-export const storeItem = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const storeItem = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: storeItem.url(args, options),
     method: 'post',
 })
@@ -627,7 +627,7 @@ storeItem.definition = {
 * @see app/Http/Controllers/PembelianController.php:491
 * @route '/pembelian/{purchaseOrder}/item'
 */
-storeItem.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+storeItem.url = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { purchaseOrder: args }
     }
@@ -660,7 +660,7 @@ storeItem.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrd
 * @see app/Http/Controllers/PembelianController.php:491
 * @route '/pembelian/{purchaseOrder}/item'
 */
-storeItem.post = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+storeItem.post = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: storeItem.url(args, options),
     method: 'post',
 })
@@ -670,7 +670,7 @@ storeItem.post = (args: { purchaseOrder: number | { id: number } } | [purchaseOr
 * @see app/Http/Controllers/PembelianController.php:491
 * @route '/pembelian/{purchaseOrder}/item'
 */
-const storeItemForm = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const storeItemForm = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: storeItem.url(args, options),
     method: 'post',
 })
@@ -680,7 +680,7 @@ const storeItemForm = (args: { purchaseOrder: number | { id: number } } | [purch
 * @see app/Http/Controllers/PembelianController.php:491
 * @route '/pembelian/{purchaseOrder}/item'
 */
-storeItemForm.post = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+storeItemForm.post = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: storeItem.url(args, options),
     method: 'post',
 })
@@ -692,7 +692,7 @@ storeItem.form = storeItemForm
 * @see app/Http/Controllers/PembelianController.php:609
 * @route '/item-pembelian/{item}'
 */
-export const updateItem = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const updateItem = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updateItem.url(args, options),
     method: 'put',
 })
@@ -707,7 +707,7 @@ updateItem.definition = {
 * @see app/Http/Controllers/PembelianController.php:609
 * @route '/item-pembelian/{item}'
 */
-updateItem.url = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+updateItem.url = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { item: args }
     }
@@ -740,7 +740,7 @@ updateItem.url = (args: { item: number | { id: number } } | [item: number | { id
 * @see app/Http/Controllers/PembelianController.php:609
 * @route '/item-pembelian/{item}'
 */
-updateItem.put = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+updateItem.put = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updateItem.url(args, options),
     method: 'put',
 })
@@ -750,7 +750,7 @@ updateItem.put = (args: { item: number | { id: number } } | [item: number | { id
 * @see app/Http/Controllers/PembelianController.php:609
 * @route '/item-pembelian/{item}'
 */
-const updateItemForm = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateItemForm = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateItem.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -765,7 +765,7 @@ const updateItemForm = (args: { item: number | { id: number } } | [item: number 
 * @see app/Http/Controllers/PembelianController.php:609
 * @route '/item-pembelian/{item}'
 */
-updateItemForm.put = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateItemForm.put = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updateItem.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -782,7 +782,7 @@ updateItem.form = updateItemForm
 * @see app/Http/Controllers/PembelianController.php:831
 * @route '/item-pembelian/{item}'
 */
-export const destroyItem = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroyItem = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyItem.url(args, options),
     method: 'delete',
 })
@@ -797,7 +797,7 @@ destroyItem.definition = {
 * @see app/Http/Controllers/PembelianController.php:831
 * @route '/item-pembelian/{item}'
 */
-destroyItem.url = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroyItem.url = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { item: args }
     }
@@ -830,7 +830,7 @@ destroyItem.url = (args: { item: number | { id: number } } | [item: number | { i
 * @see app/Http/Controllers/PembelianController.php:831
 * @route '/item-pembelian/{item}'
 */
-destroyItem.delete = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroyItem.delete = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyItem.url(args, options),
     method: 'delete',
 })
@@ -840,7 +840,7 @@ destroyItem.delete = (args: { item: number | { id: number } } | [item: number | 
 * @see app/Http/Controllers/PembelianController.php:831
 * @route '/item-pembelian/{item}'
 */
-const destroyItemForm = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyItemForm = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroyItem.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -855,7 +855,7 @@ const destroyItemForm = (args: { item: number | { id: number } } | [item: number
 * @see app/Http/Controllers/PembelianController.php:831
 * @route '/item-pembelian/{item}'
 */
-destroyItemForm.delete = (args: { item: number | { id: number } } | [item: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyItemForm.delete = (args: { item: string | number | { id: string | number } } | [item: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroyItem.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -872,7 +872,7 @@ destroyItem.form = destroyItemForm
 * @see app/Http/Controllers/PembelianController.php:981
 * @route '/pembelian/{purchaseOrder}/biayalain'
 */
-export const biayaLain = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const biayaLain = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: biayaLain.url(args, options),
     method: 'put',
 })
@@ -887,7 +887,7 @@ biayaLain.definition = {
 * @see app/Http/Controllers/PembelianController.php:981
 * @route '/pembelian/{purchaseOrder}/biayalain'
 */
-biayaLain.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+biayaLain.url = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { purchaseOrder: args }
     }
@@ -920,7 +920,7 @@ biayaLain.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrd
 * @see app/Http/Controllers/PembelianController.php:981
 * @route '/pembelian/{purchaseOrder}/biayalain'
 */
-biayaLain.put = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+biayaLain.put = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: biayaLain.url(args, options),
     method: 'put',
 })
@@ -930,7 +930,7 @@ biayaLain.put = (args: { purchaseOrder: number | { id: number } } | [purchaseOrd
 * @see app/Http/Controllers/PembelianController.php:981
 * @route '/pembelian/{purchaseOrder}/biayalain'
 */
-const biayaLainForm = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const biayaLainForm = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: biayaLain.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -945,7 +945,7 @@ const biayaLainForm = (args: { purchaseOrder: number | { id: number } } | [purch
 * @see app/Http/Controllers/PembelianController.php:981
 * @route '/pembelian/{purchaseOrder}/biayalain'
 */
-biayaLainForm.put = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+biayaLainForm.put = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: biayaLain.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -962,7 +962,7 @@ biayaLain.form = biayaLainForm
 * @see app/Http/Controllers/PembelianController.php:1011
 * @route '/pembelian/{purchaseOrder}/pembayaran'
 */
-export const storePayment = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const storePayment = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: storePayment.url(args, options),
     method: 'post',
 })
@@ -977,7 +977,7 @@ storePayment.definition = {
 * @see app/Http/Controllers/PembelianController.php:1011
 * @route '/pembelian/{purchaseOrder}/pembayaran'
 */
-storePayment.url = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+storePayment.url = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { purchaseOrder: args }
     }
@@ -1010,7 +1010,7 @@ storePayment.url = (args: { purchaseOrder: number | { id: number } } | [purchase
 * @see app/Http/Controllers/PembelianController.php:1011
 * @route '/pembelian/{purchaseOrder}/pembayaran'
 */
-storePayment.post = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+storePayment.post = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: storePayment.url(args, options),
     method: 'post',
 })
@@ -1020,7 +1020,7 @@ storePayment.post = (args: { purchaseOrder: number | { id: number } } | [purchas
 * @see app/Http/Controllers/PembelianController.php:1011
 * @route '/pembelian/{purchaseOrder}/pembayaran'
 */
-const storePaymentForm = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const storePaymentForm = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: storePayment.url(args, options),
     method: 'post',
 })
@@ -1030,7 +1030,7 @@ const storePaymentForm = (args: { purchaseOrder: number | { id: number } } | [pu
 * @see app/Http/Controllers/PembelianController.php:1011
 * @route '/pembelian/{purchaseOrder}/pembayaran'
 */
-storePaymentForm.post = (args: { purchaseOrder: number | { id: number } } | [purchaseOrder: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+storePaymentForm.post = (args: { purchaseOrder: string | number | { id: string | number } } | [purchaseOrder: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: storePayment.url(args, options),
     method: 'post',
 })
@@ -1042,7 +1042,7 @@ storePayment.form = storePaymentForm
 * @see app/Http/Controllers/PembelianController.php:1049
 * @route '/pembayaran-pembelian/{payment}'
 */
-export const updatePayment = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const updatePayment = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updatePayment.url(args, options),
     method: 'put',
 })
@@ -1057,7 +1057,7 @@ updatePayment.definition = {
 * @see app/Http/Controllers/PembelianController.php:1049
 * @route '/pembayaran-pembelian/{payment}'
 */
-updatePayment.url = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+updatePayment.url = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { payment: args }
     }
@@ -1090,7 +1090,7 @@ updatePayment.url = (args: { payment: number | { id: number } } | [payment: numb
 * @see app/Http/Controllers/PembelianController.php:1049
 * @route '/pembayaran-pembelian/{payment}'
 */
-updatePayment.put = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+updatePayment.put = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: updatePayment.url(args, options),
     method: 'put',
 })
@@ -1100,7 +1100,7 @@ updatePayment.put = (args: { payment: number | { id: number } } | [payment: numb
 * @see app/Http/Controllers/PembelianController.php:1049
 * @route '/pembayaran-pembelian/{payment}'
 */
-const updatePaymentForm = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updatePaymentForm = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updatePayment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -1115,7 +1115,7 @@ const updatePaymentForm = (args: { payment: number | { id: number } } | [payment
 * @see app/Http/Controllers/PembelianController.php:1049
 * @route '/pembayaran-pembelian/{payment}'
 */
-updatePaymentForm.put = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updatePaymentForm.put = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: updatePayment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -1132,7 +1132,7 @@ updatePayment.form = updatePaymentForm
 * @see app/Http/Controllers/PembelianController.php:1110
 * @route '/pembayaran-pembelian/{payment}'
 */
-export const destroyPayment = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroyPayment = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyPayment.url(args, options),
     method: 'delete',
 })
@@ -1147,7 +1147,7 @@ destroyPayment.definition = {
 * @see app/Http/Controllers/PembelianController.php:1110
 * @route '/pembayaran-pembelian/{payment}'
 */
-destroyPayment.url = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroyPayment.url = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { payment: args }
     }
@@ -1180,7 +1180,7 @@ destroyPayment.url = (args: { payment: number | { id: number } } | [payment: num
 * @see app/Http/Controllers/PembelianController.php:1110
 * @route '/pembayaran-pembelian/{payment}'
 */
-destroyPayment.delete = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroyPayment.delete = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroyPayment.url(args, options),
     method: 'delete',
 })
@@ -1190,7 +1190,7 @@ destroyPayment.delete = (args: { payment: number | { id: number } } | [payment: 
 * @see app/Http/Controllers/PembelianController.php:1110
 * @route '/pembayaran-pembelian/{payment}'
 */
-const destroyPaymentForm = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyPaymentForm = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroyPayment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -1205,7 +1205,7 @@ const destroyPaymentForm = (args: { payment: number | { id: number } } | [paymen
 * @see app/Http/Controllers/PembelianController.php:1110
 * @route '/pembayaran-pembelian/{payment}'
 */
-destroyPaymentForm.delete = (args: { payment: number | { id: number } } | [payment: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyPaymentForm.delete = (args: { payment: string | number | { id: string | number } } | [payment: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroyPayment.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

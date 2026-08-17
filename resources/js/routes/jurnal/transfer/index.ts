@@ -243,7 +243,7 @@ update.form = updateForm
 * @see app/Http/Controllers/JournalController.php:1116
 * @route '/jurnal-transfer/{journal}'
 */
-export const destroy = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -258,7 +258,7 @@ destroy.definition = {
 * @see app/Http/Controllers/JournalController.php:1116
 * @route '/jurnal-transfer/{journal}'
 */
-destroy.url = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { journal: args }
     }
@@ -291,7 +291,7 @@ destroy.url = (args: { journal: number | { id: number } } | [journal: number | {
 * @see app/Http/Controllers/JournalController.php:1116
 * @route '/jurnal-transfer/{journal}'
 */
-destroy.delete = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -301,7 +301,7 @@ destroy.delete = (args: { journal: number | { id: number } } | [journal: number 
 * @see app/Http/Controllers/JournalController.php:1116
 * @route '/jurnal-transfer/{journal}'
 */
-const destroyForm = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -316,7 +316,7 @@ const destroyForm = (args: { journal: number | { id: number } } | [journal: numb
 * @see app/Http/Controllers/JournalController.php:1116
 * @route '/jurnal-transfer/{journal}'
 */
-destroyForm.delete = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

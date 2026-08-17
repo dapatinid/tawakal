@@ -144,7 +144,7 @@ function toggleFaq(index: number) {
       
       <div class="relative z-20 max-w-3xl">
         <h2 class="text-5xl md:text-7xl font-extrabold text-blue-500 drop-shadow-sm leading-tight mb-4">
-          UD. TAWAKAL
+          UD. TAWAKAL WELERI
         </h2>
         <p class="text-xl md:text-2xl font-medium text-gray-800 dark:text-gray-200">
           Mitra Terpercaya Kebutuhan Konstruksi & Interior Anda.
