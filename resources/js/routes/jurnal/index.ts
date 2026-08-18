@@ -223,7 +223,7 @@ store.form = storeForm
 * @see app/Http/Controllers/JournalController.php:284
 * @route '/jurnal/{journal}/edit'
 */
-export const edit = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const edit = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -238,7 +238,7 @@ edit.definition = {
 * @see app/Http/Controllers/JournalController.php:284
 * @route '/jurnal/{journal}/edit'
 */
-edit.url = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+edit.url = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { journal: args }
     }
@@ -271,7 +271,7 @@ edit.url = (args: { journal: string | number | { id: string | number } } | [jour
 * @see app/Http/Controllers/JournalController.php:284
 * @route '/jurnal/{journal}/edit'
 */
-edit.get = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+edit.get = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -281,7 +281,7 @@ edit.get = (args: { journal: string | number | { id: string | number } } | [jour
 * @see app/Http/Controllers/JournalController.php:284
 * @route '/jurnal/{journal}/edit'
 */
-edit.head = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+edit.head = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: edit.url(args, options),
     method: 'head',
 })
@@ -291,7 +291,7 @@ edit.head = (args: { journal: string | number | { id: string | number } } | [jou
 * @see app/Http/Controllers/JournalController.php:284
 * @route '/jurnal/{journal}/edit'
 */
-const editForm = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const editForm = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -301,7 +301,7 @@ const editForm = (args: { journal: string | number | { id: string | number } } |
 * @see app/Http/Controllers/JournalController.php:284
 * @route '/jurnal/{journal}/edit'
 */
-editForm.get = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.get = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -311,7 +311,7 @@ editForm.get = (args: { journal: string | number | { id: string | number } } | [
 * @see app/Http/Controllers/JournalController.php:284
 * @route '/jurnal/{journal}/edit'
 */
-editForm.head = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.head = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -328,7 +328,7 @@ edit.form = editForm
 * @see app/Http/Controllers/JournalController.php:312
 * @route '/jurnal/{journal}'
 */
-export const update = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const update = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -343,7 +343,7 @@ update.definition = {
 * @see app/Http/Controllers/JournalController.php:312
 * @route '/jurnal/{journal}'
 */
-update.url = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+update.url = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { journal: args }
     }
@@ -376,7 +376,7 @@ update.url = (args: { journal: string | number | { id: string | number } } | [jo
 * @see app/Http/Controllers/JournalController.php:312
 * @route '/jurnal/{journal}'
 */
-update.put = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+update.put = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: update.url(args, options),
     method: 'put',
 })
@@ -386,7 +386,7 @@ update.put = (args: { journal: string | number | { id: string | number } } | [jo
 * @see app/Http/Controllers/JournalController.php:312
 * @route '/jurnal/{journal}'
 */
-const updateForm = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const updateForm = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -401,7 +401,7 @@ const updateForm = (args: { journal: string | number | { id: string | number } }
 * @see app/Http/Controllers/JournalController.php:312
 * @route '/jurnal/{journal}'
 */
-updateForm.put = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+updateForm.put = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: update.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -418,7 +418,7 @@ update.form = updateForm
 * @see app/Http/Controllers/JournalController.php:394
 * @route '/jurnal/{journal}'
 */
-export const destroy = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -433,7 +433,7 @@ destroy.definition = {
 * @see app/Http/Controllers/JournalController.php:394
 * @route '/jurnal/{journal}'
 */
-destroy.url = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { journal: args }
     }
@@ -466,7 +466,7 @@ destroy.url = (args: { journal: string | number | { id: string | number } } | [j
 * @see app/Http/Controllers/JournalController.php:394
 * @route '/jurnal/{journal}'
 */
-destroy.delete = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -476,7 +476,7 @@ destroy.delete = (args: { journal: string | number | { id: string | number } } |
 * @see app/Http/Controllers/JournalController.php:394
 * @route '/jurnal/{journal}'
 */
-const destroyForm = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -491,7 +491,7 @@ const destroyForm = (args: { journal: string | number | { id: string | number } 
 * @see app/Http/Controllers/JournalController.php:394
 * @route '/jurnal/{journal}'
 */
-destroyForm.delete = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { journal: number | { id: number } } | [journal: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

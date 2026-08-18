@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-export const store = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const store = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: store.url(args, options),
     method: 'get',
 })
@@ -19,7 +19,7 @@ store.definition = {
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-store.url = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions) => {
+store.url = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { branch: args }
     }
@@ -52,7 +52,7 @@ store.url = (args: { branch: string | number | { slug: string | number } } | [br
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-store.get = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+store.get = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: store.url(args, options),
     method: 'get',
 })
@@ -62,7 +62,7 @@ store.get = (args: { branch: string | number | { slug: string | number } } | [br
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-store.head = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+store.head = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: store.url(args, options),
     method: 'head',
 })
@@ -72,7 +72,7 @@ store.head = (args: { branch: string | number | { slug: string | number } } | [b
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-const storeForm = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const storeForm = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: store.url(args, options),
     method: 'get',
 })
@@ -82,7 +82,7 @@ const storeForm = (args: { branch: string | number | { slug: string | number } }
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-storeForm.get = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+storeForm.get = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: store.url(args, options),
     method: 'get',
 })
@@ -92,7 +92,7 @@ storeForm.get = (args: { branch: string | number | { slug: string | number } } |
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-storeForm.head = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+storeForm.head = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: store.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',

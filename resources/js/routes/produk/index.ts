@@ -85,7 +85,7 @@ index.form = indexForm
 * @see app/Http/Controllers/ProdukController.php:118
 * @route '/produk/{produk}/show'
 */
-export const show = (args: { produk: string | number | { slug: string | number } } | [produk: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { produk: string | { slug: string } } | [produk: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -100,7 +100,7 @@ show.definition = {
 * @see app/Http/Controllers/ProdukController.php:118
 * @route '/produk/{produk}/show'
 */
-show.url = (args: { produk: string | number | { slug: string | number } } | [produk: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions) => {
+show.url = (args: { produk: string | { slug: string } } | [produk: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { produk: args }
     }
@@ -133,7 +133,7 @@ show.url = (args: { produk: string | number | { slug: string | number } } | [pro
 * @see app/Http/Controllers/ProdukController.php:118
 * @route '/produk/{produk}/show'
 */
-show.get = (args: { produk: string | number | { slug: string | number } } | [produk: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { produk: string | { slug: string } } | [produk: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -143,7 +143,7 @@ show.get = (args: { produk: string | number | { slug: string | number } } | [pro
 * @see app/Http/Controllers/ProdukController.php:118
 * @route '/produk/{produk}/show'
 */
-show.head = (args: { produk: string | number | { slug: string | number } } | [produk: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { produk: string | { slug: string } } | [produk: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -153,7 +153,7 @@ show.head = (args: { produk: string | number | { slug: string | number } } | [pr
 * @see app/Http/Controllers/ProdukController.php:118
 * @route '/produk/{produk}/show'
 */
-const showForm = (args: { produk: string | number | { slug: string | number } } | [produk: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const showForm = (args: { produk: string | { slug: string } } | [produk: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -163,7 +163,7 @@ const showForm = (args: { produk: string | number | { slug: string | number } } 
 * @see app/Http/Controllers/ProdukController.php:118
 * @route '/produk/{produk}/show'
 */
-showForm.get = (args: { produk: string | number | { slug: string | number } } | [produk: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.get = (args: { produk: string | { slug: string } } | [produk: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -173,7 +173,7 @@ showForm.get = (args: { produk: string | number | { slug: string | number } } | 
 * @see app/Http/Controllers/ProdukController.php:118
 * @route '/produk/{produk}/show'
 */
-showForm.head = (args: { produk: string | number | { slug: string | number } } | [produk: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.head = (args: { produk: string | { slug: string } } | [produk: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -749,7 +749,7 @@ bulkQueue.form = bulkQueueForm
 * @see app/Http/Controllers/ProdukController.php:615
 * @route '/produk/bulk-remove/{product}'
 */
-export const bulkRemove = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const bulkRemove = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: bulkRemove.url(args, options),
     method: 'post',
 })
@@ -764,7 +764,7 @@ bulkRemove.definition = {
 * @see app/Http/Controllers/ProdukController.php:615
 * @route '/produk/bulk-remove/{product}'
 */
-bulkRemove.url = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+bulkRemove.url = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { product: args }
     }
@@ -797,7 +797,7 @@ bulkRemove.url = (args: { product: string | number | { id: string | number } } |
 * @see app/Http/Controllers/ProdukController.php:615
 * @route '/produk/bulk-remove/{product}'
 */
-bulkRemove.post = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+bulkRemove.post = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: bulkRemove.url(args, options),
     method: 'post',
 })
@@ -807,7 +807,7 @@ bulkRemove.post = (args: { product: string | number | { id: string | number } } 
 * @see app/Http/Controllers/ProdukController.php:615
 * @route '/produk/bulk-remove/{product}'
 */
-const bulkRemoveForm = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const bulkRemoveForm = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: bulkRemove.url(args, options),
     method: 'post',
 })
@@ -817,7 +817,7 @@ const bulkRemoveForm = (args: { product: string | number | { id: string | number
 * @see app/Http/Controllers/ProdukController.php:615
 * @route '/produk/bulk-remove/{product}'
 */
-bulkRemoveForm.post = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+bulkRemoveForm.post = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: bulkRemove.url(args, options),
     method: 'post',
 })
@@ -1078,7 +1078,7 @@ bulkQueueAlumunium.form = bulkQueueAlumuniumForm
 * @see app/Http/Controllers/ProdukController.php:881
 * @route '/produk/bulk-remove-alumunium/{product}'
 */
-export const bulkRemoveAlumunium = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const bulkRemoveAlumunium = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: bulkRemoveAlumunium.url(args, options),
     method: 'post',
 })
@@ -1093,7 +1093,7 @@ bulkRemoveAlumunium.definition = {
 * @see app/Http/Controllers/ProdukController.php:881
 * @route '/produk/bulk-remove-alumunium/{product}'
 */
-bulkRemoveAlumunium.url = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+bulkRemoveAlumunium.url = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { product: args }
     }
@@ -1126,7 +1126,7 @@ bulkRemoveAlumunium.url = (args: { product: string | number | { id: string | num
 * @see app/Http/Controllers/ProdukController.php:881
 * @route '/produk/bulk-remove-alumunium/{product}'
 */
-bulkRemoveAlumunium.post = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+bulkRemoveAlumunium.post = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: bulkRemoveAlumunium.url(args, options),
     method: 'post',
 })
@@ -1136,7 +1136,7 @@ bulkRemoveAlumunium.post = (args: { product: string | number | { id: string | nu
 * @see app/Http/Controllers/ProdukController.php:881
 * @route '/produk/bulk-remove-alumunium/{product}'
 */
-const bulkRemoveAlumuniumForm = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const bulkRemoveAlumuniumForm = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: bulkRemoveAlumunium.url(args, options),
     method: 'post',
 })
@@ -1146,7 +1146,7 @@ const bulkRemoveAlumuniumForm = (args: { product: string | number | { id: string
 * @see app/Http/Controllers/ProdukController.php:881
 * @route '/produk/bulk-remove-alumunium/{product}'
 */
-bulkRemoveAlumuniumForm.post = (args: { product: string | number | { id: string | number } } | [product: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+bulkRemoveAlumuniumForm.post = (args: { product: number | { id: number } } | [product: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: bulkRemoveAlumunium.url(args, options),
     method: 'post',
 })

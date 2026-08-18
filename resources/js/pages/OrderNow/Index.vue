@@ -383,10 +383,10 @@
 <script setup>
 import { ref, watch, computed, onMounted, onBeforeUnmount } from "vue";
 import { router, Link, usePage } from "@inertiajs/vue3";
-import ProductTileOrderNow from "@/Components/ProductTileOrderNow.vue";
-import CartSidebarOrderNow from "@/Components/CartSidebarOrderNow.vue";
-import CheckoutModalOrderNow from "@/Components/CheckoutModalOrderNow.vue";
-import StoreModal from "@/Components/StoreModal.vue";
+import ProductTileOrderNow from "@/components/ProductTileOrderNow.vue";
+import CartSidebarOrderNow from "@/components/CartSidebarOrderNow.vue";
+import CheckoutModalOrderNow from "@/components/CheckoutModalOrderNow.vue";
+import StoreModal from "@/components/StoreModal.vue";
 import { ShoppingBasket, ChevronsLeft, ChevronsRight, SlidersHorizontal, Store, Menu, X, Home, NotepadText, User } from "lucide-vue-next";
 import { Toaster } from "vue-sonner";
 import "vue-sonner/style.css";

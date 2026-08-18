@@ -349,9 +349,9 @@
 <script setup>
 import { ref, watch, computed, onMounted, onBeforeUnmount } from "vue";
 import { router, Link, usePage } from "@inertiajs/vue3";
-import ProductTile from "@/Components/ProductTile.vue";
-import CartSidebar from "@/Components/CartSidebar.vue";
-import CheckoutModal from "@/Components/CheckoutModal.vue";
+import ProductTile from "@/components/ProductTile.vue";
+import CartSidebar from "@/components/CartSidebar.vue";
+import CheckoutModal from "@/components/CheckoutModal.vue";
 import { ShoppingBasket, ChevronsLeft, ChevronsRight, SlidersHorizontal, Sparkles, ScrollText } from "lucide-vue-next";
 import { Toaster } from "vue-sonner";
 import "vue-sonner/style.css";
