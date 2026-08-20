@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../wayfinder'
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1445
+* @see app/Http/Controllers/PenjualanController.php:1479
 * @route '/penjualan/export'
 */
 export const exportMethod = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ exportMethod.definition = {
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1445
+* @see app/Http/Controllers/PenjualanController.php:1479
 * @route '/penjualan/export'
 */
 exportMethod.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ exportMethod.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1445
+* @see app/Http/Controllers/PenjualanController.php:1479
 * @route '/penjualan/export'
 */
 exportMethod.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ exportMethod.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1445
+* @see app/Http/Controllers/PenjualanController.php:1479
 * @route '/penjualan/export'
 */
 exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1445
+* @see app/Http/Controllers/PenjualanController.php:1479
 * @route '/penjualan/export'
 */
 const exportMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ const exportMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'get
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1445
+* @see app/Http/Controllers/PenjualanController.php:1479
 * @route '/penjualan/export'
 */
 exportMethodForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,7 +65,7 @@ exportMethodForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'>
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1445
+* @see app/Http/Controllers/PenjualanController.php:1479
 * @route '/penjualan/export'
 */
 exportMethodForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -404,6 +404,111 @@ printForm.head = (args: { order: number | { id: number } } | [order: number | { 
 print.form = printForm
 
 /**
+* @see \App\Http\Controllers\PenjualanController::printLandscape
+* @see app/Http/Controllers/PenjualanController.php:1445
+* @route '/penjualan/{order}/printLandscape'
+*/
+export const printLandscape = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: printLandscape.url(args, options),
+    method: 'get',
+})
+
+printLandscape.definition = {
+    methods: ["get","head"],
+    url: '/penjualan/{order}/printLandscape',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printLandscape
+* @see app/Http/Controllers/PenjualanController.php:1445
+* @route '/penjualan/{order}/printLandscape'
+*/
+printLandscape.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { order: args }
+    }
+
+    if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+        args = { order: args.id }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            order: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        order: typeof args.order === 'object'
+        ? args.order.id
+        : args.order,
+    }
+
+    return printLandscape.definition.url
+            .replace('{order}', parsedArgs.order.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printLandscape
+* @see app/Http/Controllers/PenjualanController.php:1445
+* @route '/penjualan/{order}/printLandscape'
+*/
+printLandscape.get = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: printLandscape.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printLandscape
+* @see app/Http/Controllers/PenjualanController.php:1445
+* @route '/penjualan/{order}/printLandscape'
+*/
+printLandscape.head = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: printLandscape.url(args, options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printLandscape
+* @see app/Http/Controllers/PenjualanController.php:1445
+* @route '/penjualan/{order}/printLandscape'
+*/
+const printLandscapeForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: printLandscape.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printLandscape
+* @see app/Http/Controllers/PenjualanController.php:1445
+* @route '/penjualan/{order}/printLandscape'
+*/
+printLandscapeForm.get = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: printLandscape.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printLandscape
+* @see app/Http/Controllers/PenjualanController.php:1445
+* @route '/penjualan/{order}/printLandscape'
+*/
+printLandscapeForm.head = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: printLandscape.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+printLandscape.form = printLandscapeForm
+
+/**
 * @see \App\Http\Controllers\PenjualanController::show
 * @see app/Http/Controllers/PenjualanController.php:387
 * @route '/penjualan/{order}'
@@ -604,6 +709,7 @@ const penjualan = {
     create: Object.assign(create, create),
     store: Object.assign(store, store),
     print: Object.assign(print, print),
+    printLandscape: Object.assign(printLandscape, printLandscape),
     show: Object.assign(show, show),
     destroy: Object.assign(destroy, destroy),
 }

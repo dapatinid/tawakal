@@ -89,6 +89,7 @@ Route::group(['middleware' => ['auth', 'verified', 'is_active', 'profile.complet
         Route::get('penjualan/buat/baru', [PenjualanController::class, 'create'])->name('penjualan.create');
         Route::post('penjualan/store', [PenjualanController::class, 'store'])->name('penjualan.store');
         Route::get('penjualan/{order}/print', [PenjualanController::class, 'print'])->name('penjualan.print');
+        Route::get('penjualan/{order}/printLandscape', [PenjualanController::class, 'printLandscape'])->name('penjualan.printLandscape');
         Route::get('penjualan/{order}', [PenjualanController::class, 'show'])->name('penjualan.show');
         Route::put('penjualan/{order}/editinfo', [PenjualanController::class, 'editInfo']);
         Route::delete('/penjualan/{order}', [PenjualanController::class, 'destroy'])->name('penjualan.destroy');

@@ -1442,6 +1442,40 @@ public function index(Request $request)
         ])->withViewData(['layout' => false]);
     } 
 
+    public function printLandscape(Order $order)
+    {
+        $order->load([
+            'user.province', 
+            'user.cityRelation', 
+            'user.districtRelation', 
+            'user.villageRelation', 
+            'items.product'
+        ]);
+
+        // ✅ Generate barcode SVG
+        $generator = new BarcodeGeneratorSVG();
+        $barcodeSvg = $generator->getBarcode(
+            $order->code, 
+            $generator::TYPE_CODE_128,
+            2,  // lebar bar
+            40  // tinggi bar
+        );
+
+        // ✅ QR Code
+        $renderer = new ImageRenderer(
+            new RendererStyle(150),
+            new SvgImageBackEnd()
+        );
+        $writer = new Writer($renderer);
+        $qrSvg = $writer->writeString($order->code);
+
+        return Inertia::render('Penjualan/PrintLandscape', [
+            'order'      => $order,
+            'barcodeSvg' => $barcodeSvg, 
+            'qrSvg'      => $qrSvg,
+        ])->withViewData(['layout' => false]);
+    } 
+
 public function export(Request $request)
 {
     $paymentStatus = $request->get('payment_status', 'all');

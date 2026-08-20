@@ -16,7 +16,8 @@ import {
   Plus,
   PackageSearch,
   Check,
-  FileDown
+  FileDown,
+  ReceiptText
 } from 'lucide-vue-next';
 
 import {
@@ -237,6 +238,10 @@ function savePayment(data: any) {
     preserveScroll: true,
     onSuccess: () => (showPaymentModal.value = false),
   });
+}
+
+function openPrintLandscape(id: number) {
+  window.open(`/penjualan/${id}/printLandscape`, '_blank');
 }
 
 function openPrint(id: number) {
@@ -673,8 +678,12 @@ const exportUrl = computed(() => {
                   Lunaskan <Banknote class="size-4 ms-auto" />
                 </ContextMenuItem>
                 
-                <ContextMenuItem @click="openPrint(o.id)">
+                <ContextMenuItem @click="openPrintLandscape(o.id)">
                   Print <Printer class="size-4 ms-auto" />
+                </ContextMenuItem>
+                
+                <ContextMenuItem @click="openPrint(o.id)">
+                  Print <ReceiptText class="size-4 ms-auto" />
                 </ContextMenuItem>
 
                 <div class="border-t my-1"></div>
