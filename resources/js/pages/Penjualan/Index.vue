@@ -17,7 +17,8 @@ import {
   PackageSearch,
   Check,
   FileDown,
-  ReceiptText
+  ReceiptText,
+  Truck
 } from 'lucide-vue-next';
 
 import {
@@ -247,6 +248,11 @@ function openPrintLandscape(id: number) {
 function openPrint(id: number) {
   window.open(`/penjualan/${id}/print`, '_blank');
 }
+
+function openPrintPackingSlip(id: number) {
+  window.open(`/penjualan/${id}/printPackingSlip`, '_blank');
+}
+
 
 function updateOrderStatus(order: any, status: string) {
   router.put(
@@ -684,6 +690,10 @@ const exportUrl = computed(() => {
                 
                 <ContextMenuItem @click="openPrint(o.id)">
                   Print <ReceiptText class="size-4 ms-auto" />
+                </ContextMenuItem>
+                
+                <ContextMenuItem @click="openPrintPackingSlip(o.id)">
+                  Srt. Jalan <Truck class="size-4 ms-auto" />
                 </ContextMenuItem>
 
                 <div class="border-t my-1"></div>

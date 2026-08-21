@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../../wayfinder'
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1479
+* @see app/Http/Controllers/PenjualanController.php:1475
 * @route '/penjualan/export'
 */
 export const exportMethod = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -16,7 +16,7 @@ exportMethod.definition = {
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1479
+* @see app/Http/Controllers/PenjualanController.php:1475
 * @route '/penjualan/export'
 */
 exportMethod.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ exportMethod.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1479
+* @see app/Http/Controllers/PenjualanController.php:1475
 * @route '/penjualan/export'
 */
 exportMethod.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -35,7 +35,7 @@ exportMethod.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1479
+* @see app/Http/Controllers/PenjualanController.php:1475
 * @route '/penjualan/export'
 */
 exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -45,7 +45,7 @@ exportMethod.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1479
+* @see app/Http/Controllers/PenjualanController.php:1475
 * @route '/penjualan/export'
 */
 const exportMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -55,7 +55,7 @@ const exportMethodForm = (options?: RouteQueryOptions): RouteFormDefinition<'get
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1479
+* @see app/Http/Controllers/PenjualanController.php:1475
 * @route '/penjualan/export'
 */
 exportMethodForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -65,7 +65,7 @@ exportMethodForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'>
 
 /**
 * @see \App\Http\Controllers\PenjualanController::exportMethod
-* @see app/Http/Controllers/PenjualanController.php:1479
+* @see app/Http/Controllers/PenjualanController.php:1475
 * @route '/penjualan/export'
 */
 exportMethodForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -507,6 +507,111 @@ printLandscapeForm.head = (args: { order: number | { id: number } } | [order: nu
 })
 
 printLandscape.form = printLandscapeForm
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printPackingSlip
+* @see app/Http/Controllers/PenjualanController.php:1460
+* @route '/penjualan/{order}/printPackingSlip'
+*/
+export const printPackingSlip = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: printPackingSlip.url(args, options),
+    method: 'get',
+})
+
+printPackingSlip.definition = {
+    methods: ["get","head"],
+    url: '/penjualan/{order}/printPackingSlip',
+} satisfies RouteDefinition<["get","head"]>
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printPackingSlip
+* @see app/Http/Controllers/PenjualanController.php:1460
+* @route '/penjualan/{order}/printPackingSlip'
+*/
+printPackingSlip.url = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+    if (typeof args === 'string' || typeof args === 'number') {
+        args = { order: args }
+    }
+
+    if (typeof args === 'object' && !Array.isArray(args) && 'id' in args) {
+        args = { order: args.id }
+    }
+
+    if (Array.isArray(args)) {
+        args = {
+            order: args[0],
+        }
+    }
+
+    args = applyUrlDefaults(args)
+
+    const parsedArgs = {
+        order: typeof args.order === 'object'
+        ? args.order.id
+        : args.order,
+    }
+
+    return printPackingSlip.definition.url
+            .replace('{order}', parsedArgs.order.toString())
+            .replace(/\/+$/, '') + queryParams(options)
+}
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printPackingSlip
+* @see app/Http/Controllers/PenjualanController.php:1460
+* @route '/penjualan/{order}/printPackingSlip'
+*/
+printPackingSlip.get = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+    url: printPackingSlip.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printPackingSlip
+* @see app/Http/Controllers/PenjualanController.php:1460
+* @route '/penjualan/{order}/printPackingSlip'
+*/
+printPackingSlip.head = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+    url: printPackingSlip.url(args, options),
+    method: 'head',
+})
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printPackingSlip
+* @see app/Http/Controllers/PenjualanController.php:1460
+* @route '/penjualan/{order}/printPackingSlip'
+*/
+const printPackingSlipForm = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: printPackingSlip.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printPackingSlip
+* @see app/Http/Controllers/PenjualanController.php:1460
+* @route '/penjualan/{order}/printPackingSlip'
+*/
+printPackingSlipForm.get = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: printPackingSlip.url(args, options),
+    method: 'get',
+})
+
+/**
+* @see \App\Http\Controllers\PenjualanController::printPackingSlip
+* @see app/Http/Controllers/PenjualanController.php:1460
+* @route '/penjualan/{order}/printPackingSlip'
+*/
+printPackingSlipForm.head = (args: { order: number | { id: number } } | [order: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+    action: printPackingSlip.url(args, {
+        [options?.mergeQuery ? 'mergeQuery' : 'query']: {
+            _method: 'HEAD',
+            ...(options?.query ?? options?.mergeQuery ?? {}),
+        }
+    }),
+    method: 'get',
+})
+
+printPackingSlip.form = printPackingSlipForm
 
 /**
 * @see \App\Http\Controllers\PenjualanController::show
@@ -1403,6 +1508,6 @@ destroyPaymentForm.delete = (args: { payment: number | { id: number } } | [payme
 
 destroyPayment.form = destroyPaymentForm
 
-const PenjualanController = { exportMethod, index, create, store, print, printLandscape, show, editInfo, destroy, storeItem, updateItem, destroyItem, biayaLain, storePayment, updatePayment, destroyPayment, export: exportMethod }
+const PenjualanController = { exportMethod, index, create, store, print, printLandscape, printPackingSlip, show, editInfo, destroy, storeItem, updateItem, destroyItem, biayaLain, storePayment, updatePayment, destroyPayment, export: exportMethod }
 
 export default PenjualanController

@@ -22,7 +22,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { EllipsisVertical, Plus, Pencil, Check, NotepadText, CircleDollarSign, PackageOpen, SquareChevronDown } from "lucide-vue-next";
+import { EllipsisVertical, Plus, Pencil, Check, NotepadText, CircleDollarSign, PackageOpen, SquareChevronDown, Printer, ReceiptText, Truck } from "lucide-vue-next";
 
 import ItemPembelianFormModal from "@/components/ItemPembelianFormModal.vue";
 import DeleteItemPembelianDialog from "@/components/DeleteItemPembelianDialog.vue";
@@ -250,6 +250,18 @@ const saveInfoEdited = () => {
     notes: orderValues.value.notes,
   });
 };
+
+function openPrintLandscape(id: number) {
+  window.open(`/pembelian/${id}/printLandscape`, '_blank');
+}
+
+function openPrint(id: number) {
+  window.open(`/pembelian/${id}/print`, '_blank');
+}
+
+function openPrintPackingSlip(id: number) {
+  window.open(`/pembelian/${id}/printPackingSlip`, '_blank');
+}
 </script>
 
 
@@ -257,7 +269,7 @@ const saveInfoEdited = () => {
     <Head title="Rincian Pembelian" />
 
     <AppLayout :breadcrumbs="breadcrumbs">
-      <div class="p-3 space-y-4 pb-7">
+      <div class="p-3 space-y-4 pb-14">
 
         <div class="flex justify-between">        
           <h1 class="text-2xl font-bold">#{{ order.id }} <span class="text-sm"> Q{{ order.q }}</span></h1>
@@ -792,6 +804,25 @@ const saveInfoEdited = () => {
           :paymentId="deleteId"
           @update:open="v => deleteDialogOpen = v"
         />
+
+        <!-- FLOATING BUTTON -->
+        <!-- PRINT -->
+        <div class="fixed bottom-2 -translate-x-1/2 left-1/2 z-50">
+          <div
+            class="
+              p-1 space-x-1
+              flex items-center justify-center
+              rounded-full
+              bg-background
+              shadow-md
+            "
+          >
+            <Printer class="size-8 p-2 rounded-full hover:bg-red-500" @click="openPrintLandscape(o.id)"/>
+            <ReceiptText class="size-8 p-2 rounded-full hover:bg-blue-500" @click="openPrint(order.id)"/>
+            <Truck class="size-8 p-2 rounded-full hover:bg-red-500" @click="openPrintPackingSlip(o.id)"/>
+          </div>
+        </div> 
+
       </div>   
     </AppLayout>
 </template>

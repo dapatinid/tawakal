@@ -14,6 +14,7 @@ import {
   Printer,
   Download,
   Upload,
+  Truck,
 } from 'lucide-vue-next'
 
 import {
@@ -364,7 +365,7 @@ const cardGradient = (status: string) => {
             <ContextMenuContent>
               
               <ContextMenuItem @click="openPrintPackingSlip(a.id)">
-                Surat Jalan <Printer class="size-4 ms-auto" />
+                Surat Jalan <Truck class="size-4 ms-auto" />
               </ContextMenuItem>
               <ContextMenuItem @click="openPrint(a.id)">
                 Print <Printer class="size-4 ms-auto" />

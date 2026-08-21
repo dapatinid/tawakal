@@ -1430,7 +1430,7 @@ public function index(Request $request)
         // ✅ QR Code
         $renderer = new ImageRenderer(
             new RendererStyle(150),
-            new SvgImageBackEnd()
+            new SvgImageBackEnd()   
         );
         $writer = new Writer($renderer);
         $qrSvg = $writer->writeString($order->code);
@@ -1452,27 +1452,23 @@ public function index(Request $request)
             'items.product'
         ]);
 
-        // ✅ Generate barcode SVG
-        $generator = new BarcodeGeneratorSVG();
-        $barcodeSvg = $generator->getBarcode(
-            $order->code, 
-            $generator::TYPE_CODE_128,
-            2,  // lebar bar
-            40  // tinggi bar
-        );
-
-        // ✅ QR Code
-        $renderer = new ImageRenderer(
-            new RendererStyle(150),
-            new SvgImageBackEnd()
-        );
-        $writer = new Writer($renderer);
-        $qrSvg = $writer->writeString($order->code);
-
         return Inertia::render('Penjualan/PrintLandscape', [
             'order'      => $order,
-            'barcodeSvg' => $barcodeSvg, 
-            'qrSvg'      => $qrSvg,
+        ])->withViewData(['layout' => false]);
+    } 
+
+    public function printPackingSlip(Order $order)
+    {
+        $order->load([
+            'user.province', 
+            'user.cityRelation', 
+            'user.districtRelation', 
+            'user.villageRelation', 
+            'items.product'
+        ]);
+
+        return Inertia::render('Penjualan/PrintPackingSlip', [
+            'order'      => $order,
         ])->withViewData(['layout' => false]);
     } 
 
