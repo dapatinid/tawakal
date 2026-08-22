@@ -140,7 +140,7 @@ function toggleFaq(index: number) {
         alt="Background UD Tawakal"
         class="absolute inset-0 w-full h-full object-cover z-0"
       />
-      <div class="absolute inset-0 bg-white/70 dark:bg-black/70 backdrop-blur-sm z-10"></div>
+      <div class="absolute inset-0 bg-white/70 dark:bg-black/70 z-10"></div>
       
       <div class="relative z-20 max-w-3xl">
         <h2 class="text-5xl md:text-7xl font-extrabold text-blue-500 drop-shadow-sm leading-tight mb-4">
@@ -288,8 +288,8 @@ function toggleFaq(index: number) {
               <MessageCircle class="size-8 text-green-600 dark:text-green-400" />
             </div>
             <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-2">WhatsApp</h4>
-            <a href="https://wa.me/6287811112222" target="_blank" class="text-xl font-bold text-gray-800 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-400 transition">
-              087811112222
+            <a href="https://wa.me/6281329168567" target="_blank" class="text-xl font-bold text-gray-800 dark:text-gray-200 hover:text-green-600 dark:hover:text-green-400 transition">
+              081329168567
             </a>
           </div>
           
@@ -298,7 +298,7 @@ function toggleFaq(index: number) {
               <MapPin class="size-8 text-blue-600 dark:text-blue-400" />
             </div>
             <h4 class="font-bold text-lg text-gray-900 dark:text-white mb-2">Lokasi Toko</h4>
-            <p class="text-gray-600 dark:text-gray-400">Jl. Raya Weleri Timur, depan POM Bensin Weleri</p>
+            <p class="text-gray-600 dark:text-gray-400">Jl. Raya Sukarno-Hatta No.56, Weleri, Kendal. Depan POM Bensin Weleri</p>
           </div>
 
           <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 overflow-hidden min-h-[250px]">

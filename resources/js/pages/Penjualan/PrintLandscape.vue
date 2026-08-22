@@ -59,16 +59,19 @@ const alamatLengkap = computed(() => {
       <div class="text-base">NOTA PENJUALAN</div>
     </div>
 
-    <div class="text-xs border-b border-black pb-2 mb-2">
+    <div class="text-xs border-b border-black pb-2 mb-2" >
       Jl. Raya Sukarno-Hatta No.56, Weleri, Kendal, Tlp. 0294-3641523 (HP/WA 081329168567)
     </div>
 
-    <div class="flex justify-between text-xs mb-3">
-      <table class="w-[45%]">
+    <div class="flex justify-between text-base mb-3">
+      <table class="w-[45%] border-separate leading-none">
         <tr>
           <td class="w-16 ">Customer</td>
           <td class="w-2 ">:</td>
-          <td>{{ props.order.user.name || 'Pelanggan Umum' }}</td>
+          <td>
+            <span v-if="props.order.user_alias">{{ props.order.user.name }} an {{ props.order.user_alias }}</span>
+            <span v-else>{{ props.order.user.name || 'Pelanggan Umum' }}</span>            
+          </td>
         </tr>
         <tr>
           <td class="align-top">Alamat</td>
@@ -79,51 +82,52 @@ const alamatLengkap = computed(() => {
       
       <table class="w-[45%]">
         <tr>
-          <td class="w-16 align-top">Operator</td>
-          <td class="w-2 align-top">:</td>
+          <td class="w-16 ">Operator</td>
+          <td class="w-2 ">:</td>
           <td>{{ user.name || 'Kasir' }}</td>
         </tr>
         <tr>
-          <td class="align-top">Tanggal</td>
-          <td class="align-top">:</td>
+          <td class="">Tanggal</td>
+          <td class="">:</td>
           <td>{{ tanggalTransaksi }}</td>
         </tr>
         <tr>
-          <td class="align-top">No. Jual</td>
-          <td class="align-top">:</td>
+          <td class="">No. Jual</td>
+          <td class="">:</td>
           <td>{{ props.order.code || props.order.id }}</td>
         </tr>
       </table>
     </div>
 
-    <table class="w-full text-xs border-collapse mb-4">
+    <table class="w-full text-base border-collapse mb-4">
       <thead>
         <tr class="border-y border-black">
-          <th class="py-1 text-left w-1/6">Kode</th>
-          <th class="py-1 text-left w-2/6">Nama Produk</th>
-          <th class="py-1 text-right w-1/6">@Harga</th>
-          <th class="py-1 text-center w-1/12">Qty</th>
-          <th class="py-1 text-right w-1/6">Subtotal</th>
+          <th class="px-1 text-left ">Kode</th>
+          <th class="px-1 text-left border-l border-black">Nama Produk</th>
+          <th class="px-1 text-right border-l border-black">@Harga</th>
+          <th class="px-1 text-center border-l border-black">Qty</th>
+          <th class="px-1 text-right border-l border-black">Subtotal</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in props.order.items" :key="item.id" class="border-b border-dashed border-foreground">
-          <td class="py-1 align-top">{{ item.product?.code || item.product?.sku || '-' }}</td>
-          <td class="py-1 align-top">{{ item.product?.name || item.product_name }}</td>
-          <td class="py-1 text-right align-top">{{ Number(item.price).toLocaleString('id-ID') }}</td>
-          <td class="py-1 text-center align-top">{{ item.quantity_mins }}</td>
-          <td class="py-1 text-right align-top">
+          <td class="px-1 align-top">{{ item.product?.code || item.product?.sku || '-' }}</td>
+          <td class="px-1 align-top border-l border-black">{{ item.product?.name || item.product_name }}</td>
+          <td class="px-1 text-right align-top border-l border-black">{{ Number(item.price).toLocaleString('id-ID') }}</td>
+          <td class="px-1 text-center align-top border-l border-black">{{ item.quantity_mins }}</td>
+          <td class="px-1 text-right align-top border-l border-black">
             {{ Number(item.subtotal || (item.price * item.quantity_mins)).toLocaleString('id-ID') }}
           </td>
         </tr>
       </tbody>
     </table>
 
-    <div class="flex justify-between text-xs mt-4">
+    <div class="flex justify-between text-sm mt-4">
       <div class="flex flex-col items-center w-[25%]">
         <span>Customer</span>
         <div class="mt-12 w-full border-b border-black text-center truncate">
-          {{ props.order.user.name || 'Pelanggan Umum' }}
+          <span v-if="props.order.user_alias">{{ props.order.user_alias }}</span>
+          <span v-else>{{ props.order.user.name || 'Pelanggan Umum' }}</span>
         </div>
       </div>
 
@@ -134,62 +138,69 @@ const alamatLengkap = computed(() => {
         </div>
       </div>
 
-      <div class="w-[40%] flex justify-end">
-        <table class="w-full max-w-[200px]">
-          <tr v-if="Number(props.order.discount) != 0">
-            <td class="text-right py-1">Diskon</td>
-            <td class="text-center">:</td>
-            <td class="text-right">
+      <div class="w-[40%] flex justify-end -mt-3 mx-0.5 text-base">
+        <div class="w-full max-w-50 flex flex-col gap-y-1 leading-none">
+          
+          <div v-if="Number(props.order.discount) != 0" class="grid grid-cols-[1fr_16px_96px]">
+            <div class="text-right">Diskon</div>
+            <div class="text-center">:</div>
+            <div class="text-right">
               {{ Number(props.order.discount).toLocaleString('id-ID') }}
-            </td>
-          </tr>
-          <tr v-if="Number(props.order.charge) != 0">
-            <td class="text-right py-1">Ongkir</td>
-            <td class="text-center">:</td>
-            <td class="text-right">
+            </div>
+          </div>
+
+          <div v-if="Number(props.order.charge) != 0" class="grid grid-cols-[1fr_16px_96px]">
+            <div class="text-right">Ongkir</div>
+            <div class="text-center">:</div>
+            <div class="text-right">
               {{ Number(props.order.charge).toLocaleString('id-ID') }}
-            </td>
-          </tr>
-          <tr v-if="Number(props.order.tax) != 0">
-            <td class="text-right py-1">Pajak</td>
-            <td class="text-center">:</td>
-            <td class="text-right">
+            </div>
+          </div>
+
+          <div v-if="Number(props.order.tax) != 0" class="grid grid-cols-[1fr_16px_96px]">
+            <div class="text-right">Pajak</div>
+            <div class="text-center">:</div>
+            <div class="text-right">
               {{ Number(props.order.tax).toLocaleString('id-ID') }}
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right font-bold py-1">TOTAL</td>
-            <td class="w-4 text-center">:</td>
-            <td class="text-right font-bold w-24">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[1fr_16px_96px]">
+            <div class="text-right font-bold">TOTAL</div>
+            <div class="text-center">:</div>
+            <div class="text-right font-bold">
               {{ Number(props.order.grand_total).toLocaleString('id-ID') }}
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right py-1">BAYAR</td>
-            <td class="text-center">:</td>
-            <td class="text-right">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[1fr_16px_96px]">
+            <div class="text-right">BAYAR</div>
+            <div class="text-center">:</div>
+            <div class="text-right">
               {{ Number(props.order.paid_amount).toLocaleString('id-ID') }}
-            </td>
-          </tr>
-          <tr>
-            <td class="text-right py-1">KURANG</td>
-            <td class="text-center">:</td>
-            <td class="text-right">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-[1fr_16px_96px]">
+            <div class="text-right">KURANG</div>
+            <div class="text-center">:</div>
+            <div class="text-right">
               {{ kurang > 0 ? kurang.toLocaleString('id-ID') : '0' }}
-            </td>
-          </tr>
-        </table>
+            </div>
+          </div>
+
+        </div> 
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-/* Pengaturan Kertas Landscape dengan Lebar 19cm */
+/* Pengaturan Kertas Landscape dengan Lebar 21cm */
 .print-container {
-  width: 19cm;
+  width: 21cm;
   margin: 0 auto;
-  font-family: monospace; /* Memberikan kesan nota klasik */
+  /* font-family: monospace; Memberikan kesan nota klasik */
   color: black;
   background-color: white;
 }
@@ -207,7 +218,7 @@ const alamatLengkap = computed(() => {
   }
 
   .print-container {
-    width: 19cm;
+    width: 21cm;
     margin: 0;
   }
 }

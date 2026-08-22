@@ -64,12 +64,15 @@ const alamatLengkap = computed(() => {
       Jl. Raya Sukarno-Hatta No.56, Weleri, Kendal, Tlp. 0294-3641523 (HP/WA 081329168567)
     </div>
 
-    <div class="flex justify-between text-xs mb-3">
-      <table class="w-[45%]">
+    <div class="flex justify-between text-sm mb-3">
+      <table class="w-[45%] border-separate leading-none">
         <tr>
           <td class="w-16 ">Customer</td>
           <td class="w-2 ">:</td>
-          <td>{{ props.order.user.name || 'Pelanggan Umum' }}</td>
+          <td>
+            <span v-if="props.order.user_alias">{{ props.order.user.name }} an {{ props.order.user_alias }}</span>
+            <span v-else>{{ props.order.user.name || 'Pelanggan Umum' }}</span>            
+          </td>
         </tr>
         <tr>
           <td class="align-top">Alamat</td>
@@ -92,21 +95,21 @@ const alamatLengkap = computed(() => {
       </table>
     </div>
 
-    <table class="w-full text-xs border-collapse mb-4">
+    <table class="w-full text-base border-collapse mb-4">
       <thead>
         <tr class="border-y border-black">
-          <th class="py-1 text-left w-1/6">Kode</th>
-          <th class="py-1 text-left w-2/6">Nama Produk</th>
-          <th class="py-1 text-center w-1/12">Qty</th>
-          <th class="py-1 text-right w-1/6">Keterangan</th>
+          <th class="px-1 text-left ">Kode</th>
+          <th class="px-1 text-left  border-l border-black">Nama Produk</th>
+          <th class="px-1 text-center border-l border-black">Qty</th>
+          <th class="px-1 text-right  border-l border-black">Keterangan</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in props.order.items" :key="item.id" class="border-b border-dashed border-foreground">
-          <td class="py-1 align-top">{{ item.product?.code || item.product?.sku || '-' }}</td>
-          <td class="py-1 align-top">{{ item.product?.name || item.product_name }}</td>
-          <td class="py-1 text-center align-top">{{ item.quantity_mins }}</td>
-          <td class="py-1 text-right align-top">
+          <td class="px-1 align-top">{{ item.product?.code || item.product?.sku || '-' }}</td>
+          <td class="px-1 align-top border-l border-black">{{ item.product?.name || item.product_name }}</td>
+          <td class="px-1 text-center align-top border-l border-black">{{ item.quantity_mins }}</td>
+          <td class="px-1 text-right align-top border-l border-black">
           </td>
         </tr>
       </tbody>
@@ -116,7 +119,8 @@ const alamatLengkap = computed(() => {
       <div class="flex flex-col items-center w-[25%]">
         <span>Customer</span>
         <div class="mt-12 w-full border-b border-black text-center truncate">
-          {{ props.order.user.name || 'Pelanggan Umum' }}
+            <span v-if="props.order.user_alias">{{ props.order.user_alias }}</span>
+            <span v-else>{{ props.order.user.name || 'Pelanggan Umum' }}</span>  
         </div>
       </div>
 
@@ -132,9 +136,9 @@ const alamatLengkap = computed(() => {
 </template>
 
 <style scoped>
-/* Pengaturan Kertas Landscape dengan Lebar 19cm */
+/* Pengaturan Kertas Landscape dengan Lebar 21cm */
 .print-container {
-  width: 19cm;
+  width: 21cm;
   margin: 0 auto;
   font-family: monospace; /* Memberikan kesan nota klasik */
   color: black;
@@ -154,7 +158,7 @@ const alamatLengkap = computed(() => {
   }
 
   .print-container {
-    width: 19cm;
+    width: 21cm;
     margin: 0;
   }
 }

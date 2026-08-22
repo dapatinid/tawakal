@@ -1,351 +1,3 @@
-<template>
-  <div class="flex h-screen">
-    <Toaster position="top-right" richColors />
-
-    <div v-show="!cartOpen" class="hidden sm:flex justify-center items-center relativemx-auto w-full sm:w-80 lg:w-96">
-       <span @click="cartOpen = true" class="text-base font-semibold text-gray-500 dark:text-gray-200 text-nowrap rounded-full py-1 px-3 border border-gray-300 dark:border-gray-700 cursor-pointer">Buka CART</span>
-    </div>
-
-    <!-- Sidebar Cart -->
-    <CartSidebar
-      v-model:items="cartItems"
-      v-model:open="cartOpen"
-      @checkout="openCheckout"
-      @import-order="onImportOrder"
-      @clear-group="clearActiveGroupCart"
-    />
-
-    <!-- Product list -->
-    <div ref="scrollContainer" class="overflow-auto ms-auto w-full sm:w-[calc(100vw-20rem)] lg:w-[calc(100vw-24rem)] pb-16 bg-gradient-to-br from-blue-100 via-white to-red-100 dark:from-blue-950 dark:via-gray-900 dark:to-red-950 from-10% to-90%">
-      <div class="flex items-center justify-between sticky top-0 mb-0.5 p-4 backdrop-blur-xl">
-        <!-- Tombol Cart (mobile) -->
-        <button
-          class="relative flex items-center gap-2 px-2 py-1.5 bg-accent rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-blue-500"
-          @click="() => { 
-            cartOpen = true; 
-            // toggleFullscreen() 
-            }"
-        >
-          <span
-            v-if="totalItems > 0"
-            class="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full absolute -top-2 -left-2"
-          >
-            {{ totalItems }}
-          </span>
-          <ShoppingBasket class="size-5" />
-        </button>
-
-        <!-- Search Input -->
-        <div class="flex-1 mx-3 relative flex items-center">
-
-            <!-- 🆕 INPUT ORDER TEXT -->
-            <!-- <textarea
-              v-model="orderText"
-              @keydown.enter.prevent="runOrderImport"
-              placeholder="Paste order di sini lalu tekan Enter"
-              class="w-[260px] border dark:border-gray-800 rounded-lg p-2 text-sm h-[90px] resize-none focus:ring focus:ring-blue-200"
-            ></textarea> -->
-
-          <input
-            v-model="searchInput"
-            @input="!isScanMode && debouncedSearch()"
-            @keydown.enter.prevent="isScanMode && handleScanEnter()"
-            type="text"
-            :placeholder="isScanMode ? 'Inputkan Kode' : 'Cari produk...'"
-            :class="[
-                'w-full border-2 rounded-lg p-2 pr-10 text-sm focus:ring',
-                isScanMode
-                  ? 'border-red-500 ring-red-200'
-                  : 'border-accent-foreground/30 ring-blue-200'
-              ]"
-            class="w-full border-accent-foreground/30 border-2 rounded-lg p-2 pr-10 text-sm focus:ring focus:ring-blue-200"
-          />
-
-          <!-- Tombol Reset (X) -->
-          <button
-            v-if="searchInput.length > 0"
-            @click="resetSearch"
-            class="absolute right-[50px] top-1/2 -translate-y-1/2 text-gray-800 dark:text-gray-100 hover:bg-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full size-5 text-[10pt]"
-            title="Reset pencarian"
-          >
-            ✕
-          </button>
-
-          <!-- Tombol Filter -->
-          <button
-            class="-ml-[45px] px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-sm flex items-center gap-1 scale-95"
-            @click="filterOpen = true"
-            title="Filter produk"
-          >
-            <SlidersHorizontal class="size-5" />
-          </button>
-        </div>
-
-        <!-- Dashboard -->
-        <Link
-          :href="'/penjualan'"
-          class="ms-auto items-center py-1 flex justify-center text-gray-500 dark:text-gray-300 rounded-md"
-        >
-          <ScrollText class="size-5 hover:text-blue-500" />
-        </Link>
-      </div>
-
-
-
-
-      <!-- Products -->
-      <div
-        class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1.5 px-2"
-      >
-        <ProductTile
-          v-for="p in products.data"
-          :key="p.id"
-          :product="p"
-          :cart-items="cartItems"
-          @add="addToCart"
-          @updateQty="updateCartQty"
-          @remove="removeFromCart"
-        />
-      </div>
-
-      <!-- Pagination -->
-      <div class="flex justify-center mt-4" v-if="products?.links?.length > 3">
-        <nav class="flex items-center gap-1 text-sm overflow-x-auto px-2 pb-3">
-
-          <!-- First -->
-          <Link
-            v-if="products.links[1]?.url"
-            :href="products.links[1].url"
-            @click="scrollToTop"
-            preserve-scroll
-            preserve-state
-            class="px-3 py-1 border rounded hover:bg-muted"
-          >
-            <ChevronsLeft class="w-4 h-4" />
-          </Link>
-
-          <!-- Number -->
-          <template v-for="(link, i) in products.links.filter(l => /^\d+$/.test(l.label))" :key="i">
-            <Link
-              :href="link.url ?? '#'"
-              @click="scrollToTop"
-              preserve-scroll
-              preserve-state
-              class="px-3 py-1 border rounded"
-              :class="{
-                'bg-primary text-primary-foreground font-bold': link.active,
-                'opacity-50 pointer-events-none': !link.url,
-              }"
-            >
-              {{ link.label }}
-            </Link>
-          </template>
-
-          <!-- Last -->
-          <Link
-            v-if="products.links[products.links.length - 2]?.url"
-            :href="products.links[products.links.length - 2].url"
-            @click="scrollToTop"
-            preserve-scroll
-            preserve-state
-            class="px-3 py-1 border rounded hover:bg-muted"
-          >
-            <ChevronsRight class="w-4 h-4" />
-          </Link>
-
-        </nav>
-      </div>
-      
-      <!-- GROUP BUTTON -->
-      <div class="fixed bottom-2 left-0 sm:left-[20rem] lg:left-[24rem] right-0 z-30 flex gap-2 px-3 overflow-x-auto no-scrollbar">
-        <button
-          v-for="g in groups"
-          :key="g"
-          @click="setGroup(g)"
-          class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none"
-          :class="{
-            'bg-blue-500 text-white': activeGroup === g,
-            'bg-gray-200 text-black dark:bg-gray-800 dark:text-white': activeGroup !== g
-          }"          
-        >
-          Cart {{ g }}
-          <Sparkles
-            v-if="rawCart[branchId + '_' + g] && rawCart[branchId + '_' + g].length > 0"
-            class="w-4 h-4"
-            :class="{
-              'text-white': activeGroup === g,
-              'text-red-400': activeGroup !== g
-            }"
-          />
-        </button>
-        
-        <Link href="/pembayaran" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Pembayaran</Link>
-        <Link href="/jurnal" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Jurnal</Link>
-        <Link href="/stok" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Mutasi Stok</Link>
-        <Link href="/produk" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Atur Produk</Link>
-        <button @click="toggleScanMode" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Mode</button>
-      </div>
-
-
-
-    </div>
-
-    <!-- Sidebar Filter -->
-     <transition name="slide-filter">
-      <div
-        v-if="filterOpen"
-        class="fixed inset-0 z-40 flex"
-      >
-        <!-- Overlay -->
-        <div
-          class="absolute inset-0 bg-transparent"
-          @click="filterOpen = false"
-        ></div>
-
-        <!-- Panel Sidebar -->
-        <div
-          class="relative ml-auto bg-white dark:bg-black w-80 h-full shadow-lg transform transition-transform duration-500 ease-in-out flex flex-col"
-          :class="filterOpen ? 'translate-x-0' : 'translate-x-full'"
-        >
-          <!-- Header tetap fix di atas -->
-          <div class="p-4 border-b flex justify-between items-center flex-shrink-0 bg-white dark:bg-black z-10">
-            <div class="flex justify-start items-center">
-              <h2 class="text-lg font-semibold">Filter Produk</h2>
-
-              <!-- Tombol Reset Filter -->
-              <button
-                v-if="selectedCategories.length > 0 || selectedBrands.length > 0"
-                @click="
-                  selectedCategories = [];
-                  selectedBrands = [];
-                  router.get('/pos', {
-                    search: searchInput,
-                    per_page: perPage,
-                    sort_by: sortBy,
-                    sort_direction: sortDirection
-                  }, { preserveState: true, replace: true });
-                "
-                class="py-1 px-2 ms-2 text-xs text-center rounded-md bg-red-200 dark:bg-red-900 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-200 transition-colors duration-300"
-              >
-                Reset Filter
-              </button>
-            </div>
-            <button
-              @click="filterOpen = false"
-              class="text-gray-500 hover:text-gray-700"
-            >
-              ✕
-            </button>
-          </div>
-
-          <!-- Isi filter scrollable -->
-          <div class="flex-1 overflow-y-auto p-4 text-gray-400 text-sm">
-
-                        
-          <!-- Jumlah Per Halaman -->
-          <h3 class="text-md font-semibold text-gray-700 dark:text-gray-200 mb-2">
-            Tampil per Halaman
-          </h3>
-          <div class="flex flex-wrap gap-2">
-            <button
-              v-for="n in [20, 50, 100, 500, 1000]"
-              :key="n"
-              @click="setPerPage(n)"
-              class="px-2 py-1 rounded-md border text-xs font-medium transition-colors duration-300"
-              :class="perPage === n
-                ? 'text-background border-gray-500 bg-gray-800 dark:bg-gray-100'
-                : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'"
-            >
-              {{ n }}
-            </button>
-          </div>
-            
-            <!-- Filter Sort -->
-            <h3 class="text-md font-semibold text-gray-700 dark:text-gray-200 mt-4 mb-2">
-              Urutkan Berdasarkan
-            </h3>
-
-            <div class="flex flex-col gap-2">
-              <select
-                v-model="sortBy"
-                @change="applyFilters"
-                class="w-full border rounded-md p-1 text-sm text-gray-800 dark:bg-gray-800 dark:text-white"
-              >
-                <option value="name">Nama Produk</option>
-                <option value="price">Harga</option>
-                <option value="created_at">Tanggal Dibuat</option>
-                <option value="updated_at">Tanggal Diubah</option>
-              </select>
-
-              <select
-                v-model="sortDirection"
-                @change="applyFilters"
-                class="w-full border rounded-md p-1 text-sm text-gray-800 dark:bg-gray-800 dark:text-white"
-              >
-                <option value="asc">Naik (A–Z / Murah–Mahal / Terlama)</option>
-                <option value="desc">Turun (Z–A / Mahal–Murah / Terbaru)</option>
-              </select>
-            </div>  
-
-            <!-- Filter Category -->
-            <h3 class="text-md font-semibold text-gray-700 dark:text-gray-200 mt-4 mb-2">
-              Kategori
-            </h3>
-
-            <div class="flex flex-wrap gap-2">
-              <button
-                v-for="cat in categories"
-                :key="cat.id"
-                @click="toggleCategory(cat.id)"
-                class="px-2 py-1 rounded-full border text-xs font-medium transition-colors duration-300"
-                :class="selectedCategories.includes(cat.id)
-                  ? 'bg-blue-500 text-white border-blue-500'
-                  : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'"
-              >
-                {{ cat.name }}
-              </button>
-            </div>
-
-            <!-- Filter Brand -->
-            <h3 class="text-md font-semibold text-gray-700 dark:text-gray-200 mt-4 mb-2">
-              Brand
-            </h3>
-
-            <div class="flex flex-wrap gap-2">
-              <button
-                v-for="brand in brands"
-                :key="brand.id"
-                @click="toggleBrand(brand.id)"
-                class="px-2 py-1 rounded-full border text-xs font-medium transition-colors duration-300"
-                :class="selectedBrands.includes(brand.id)
-                  ? 'bg-green-500 text-white border-green-500'
-                  : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'"
-              >
-                {{ brand.name }}
-              </button>
-            </div>  
-
-          </div>
-        </div>
-      </div>
-    </transition>
-
-    <!-- Checkout Modal -->
-    <CheckoutModal
-      v-model:open="checkoutOpen"
-      v-model:customerID="checkoutCustomerID"
-      v-model:userAlias="checkoutUserAlias"
-      v-model:notes="checkoutNotes"
-      v-model:paymentMethod="checkoutPaymentMethod"
-      v-model:date="checkoutDate"
-      v-model:orderType="checkoutOrderType"
-      :items="cartItems"
-      :users="users"
-      @done="onCheckoutDone"
-    />
-  </div>
-</template>
-
 <script setup>
 import { ref, watch, computed, onMounted, onBeforeUnmount } from "vue";
 import { router, Link, usePage } from "@inertiajs/vue3";
@@ -582,6 +234,7 @@ function addToCart(product) {
       product_id: product.id,
       sku: product.sku,
       name: product.name,
+      cost: Number(product.cost),
       price: Number(product.price),
       quantity_mins: 1,
       subtotal: Number(product.price),
@@ -1025,6 +678,355 @@ const toggleFullscreen = () => {
 
 </script>
 
+
+
+<template>
+  <div class="flex h-screen">
+    <Toaster position="top-right" richColors />
+
+    <div v-show="!cartOpen" class="hidden sm:flex justify-center items-center relativemx-auto w-full sm:w-80 lg:w-96">
+       <span @click="cartOpen = true" class="text-base font-semibold text-gray-500 dark:text-gray-200 text-nowrap rounded-full py-1 px-3 border border-gray-300 dark:border-gray-700 cursor-pointer">Buka CART</span>
+    </div>
+
+    <!-- Sidebar Cart -->
+    <CartSidebar
+      v-model:items="cartItems"
+      v-model:open="cartOpen"
+      @checkout="openCheckout"
+      @import-order="onImportOrder"
+      @clear-group="clearActiveGroupCart"
+    />
+
+    <!-- Product list -->
+    <div ref="scrollContainer" class="overflow-auto ms-auto w-full sm:w-[calc(100vw-20rem)] lg:w-[calc(100vw-24rem)] pb-16 bg-gradient-to-br from-blue-100 via-white to-red-100 dark:from-blue-950 dark:via-gray-900 dark:to-red-950 from-10% to-90%">
+      <div class="flex items-center justify-between sticky top-0 mb-0.5 p-4 backdrop-blur-xl">
+        <!-- Tombol Cart (mobile) -->
+        <button
+          class="relative flex items-center gap-2 px-2 py-1.5 bg-accent rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-blue-500"
+          @click="() => { 
+            cartOpen = true; 
+            // toggleFullscreen() 
+            }"
+        >
+          <span
+            v-if="totalItems > 0"
+            class="bg-blue-500 text-white text-xs px-2 py-0.5 rounded-full absolute -top-2 -left-2"
+          >
+            {{ totalItems }}
+          </span>
+          <ShoppingBasket class="size-5" />
+        </button>
+
+        <!-- Search Input -->
+        <div class="flex-1 mx-3 relative flex items-center">
+
+            <!-- 🆕 INPUT ORDER TEXT -->
+            <!-- <textarea
+              v-model="orderText"
+              @keydown.enter.prevent="runOrderImport"
+              placeholder="Paste order di sini lalu tekan Enter"
+              class="w-[260px] border dark:border-gray-800 rounded-lg p-2 text-sm h-[90px] resize-none focus:ring focus:ring-blue-200"
+            ></textarea> -->
+
+          <input
+            v-model="searchInput"
+            @input="!isScanMode && debouncedSearch()"
+            @keydown.enter.prevent="isScanMode && handleScanEnter()"
+            type="text"
+            :placeholder="isScanMode ? 'Inputkan Kode' : 'Cari produk...'"
+            :class="[
+                'w-full border-2 rounded-lg p-2 pr-10 text-sm focus:ring',
+                isScanMode
+                  ? 'border-red-500 ring-red-200'
+                  : 'border-accent-foreground/30 ring-blue-200'
+              ]"
+            class="w-full border-accent-foreground/30 border-2 rounded-lg p-2 pr-10 text-sm focus:ring focus:ring-blue-200"
+          />
+
+          <!-- Tombol Reset (X) -->
+          <button
+            v-if="searchInput.length > 0"
+            @click="resetSearch"
+            class="absolute right-[50px] top-1/2 -translate-y-1/2 text-gray-800 dark:text-gray-100 hover:bg-gray-300 bg-gray-100 dark:bg-gray-700 rounded-full size-5 text-[10pt]"
+            title="Reset pencarian"
+          >
+            ✕
+          </button>
+
+          <!-- Tombol Filter -->
+          <button
+            class="-ml-[45px] px-3 py-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-sm flex items-center gap-1 scale-95"
+            @click="filterOpen = true"
+            title="Filter produk"
+          >
+            <SlidersHorizontal class="size-5" />
+          </button>
+        </div>
+
+        <!-- Dashboard -->
+        <Link
+          :href="'/penjualan'"
+          class="ms-auto items-center py-1 flex justify-center text-gray-500 dark:text-gray-300 rounded-md"
+        >
+          <ScrollText class="size-5 hover:text-blue-500" />
+        </Link>
+      </div>
+
+
+
+
+      <!-- Products -->
+      <div
+        class="grid grid-cols-2 xs:grid-cols-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1.5 px-2"
+      >
+        <ProductTile
+          v-for="p in products.data"
+          :key="p.id"
+          :product="p"
+          :cart-items="cartItems"
+          @add="addToCart"
+          @updateQty="updateCartQty"
+          @remove="removeFromCart"
+        />
+      </div>
+
+      <!-- Pagination -->
+      <div class="flex justify-center mt-4" v-if="products?.links?.length > 3">
+        <nav class="flex items-center gap-1 text-sm overflow-x-auto px-2 pb-3">
+
+          <!-- First -->
+          <Link
+            v-if="products.links[1]?.url"
+            :href="products.links[1].url"
+            @click="scrollToTop"
+            preserve-scroll
+            preserve-state
+            class="px-3 py-1 border rounded hover:bg-muted"
+          >
+            <ChevronsLeft class="w-4 h-4" />
+          </Link>
+
+          <!-- Number -->
+          <template v-for="(link, i) in products.links.filter(l => /^\d+$/.test(l.label))" :key="i">
+            <Link
+              :href="link.url ?? '#'"
+              @click="scrollToTop"
+              preserve-scroll
+              preserve-state
+              class="px-3 py-1 border rounded"
+              :class="{
+                'bg-primary text-primary-foreground font-bold': link.active,
+                'opacity-50 pointer-events-none': !link.url,
+              }"
+            >
+              {{ link.label }}
+            </Link>
+          </template>
+
+          <!-- Last -->
+          <Link
+            v-if="products.links[products.links.length - 2]?.url"
+            :href="products.links[products.links.length - 2].url"
+            @click="scrollToTop"
+            preserve-scroll
+            preserve-state
+            class="px-3 py-1 border rounded hover:bg-muted"
+          >
+            <ChevronsRight class="w-4 h-4" />
+          </Link>
+
+        </nav>
+      </div>
+      
+      <!-- GROUP BUTTON -->
+      <div class="fixed bottom-2 left-0 sm:left-[20rem] lg:left-[24rem] right-0 z-30 flex gap-2 px-3 overflow-x-auto no-scrollbar">
+        <button
+          v-for="g in groups"
+          :key="g"
+          @click="setGroup(g)"
+          class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none"
+          :class="{
+            'bg-blue-500 text-white': activeGroup === g,
+            'bg-gray-200 text-black dark:bg-gray-800 dark:text-white': activeGroup !== g
+          }"          
+        >
+          Cart {{ g }}
+          <Sparkles
+            v-if="rawCart[branchId + '_' + g] && rawCart[branchId + '_' + g].length > 0"
+            class="w-4 h-4"
+            :class="{
+              'text-white': activeGroup === g,
+              'text-red-400': activeGroup !== g
+            }"
+          />
+        </button>
+        
+        <Link href="/pembayaran" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Pembayaran</Link>
+        <Link href="/jurnal" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Jurnal</Link>
+        <Link href="/stok" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Mutasi Stok</Link>
+        <Link href="/produk" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Atur Produk</Link>
+        <button @click="toggleScanMode" class="px-3 py-1 rounded-md text-xs text-nowrap font-semibold flex items-center gap-1 select-none bg-gray-200 text-black dark:bg-gray-800 dark:text-white">Mode</button>
+      </div>
+
+
+
+    </div>
+
+    <!-- Sidebar Filter -->
+     <transition name="slide-filter">
+      <div
+        v-if="filterOpen"
+        class="fixed inset-0 z-40 flex"
+      >
+        <!-- Overlay -->
+        <div
+          class="absolute inset-0 bg-transparent"
+          @click="filterOpen = false"
+        ></div>
+
+        <!-- Panel Sidebar -->
+        <div
+          class="relative ml-auto bg-white dark:bg-black w-80 h-full shadow-lg transform transition-transform duration-500 ease-in-out flex flex-col"
+          :class="filterOpen ? 'translate-x-0' : 'translate-x-full'"
+        >
+          <!-- Header tetap fix di atas -->
+          <div class="p-4 border-b flex justify-between items-center flex-shrink-0 bg-white dark:bg-black z-10">
+            <div class="flex justify-start items-center">
+              <h2 class="text-lg font-semibold">Filter Produk</h2>
+
+              <!-- Tombol Reset Filter -->
+              <button
+                v-if="selectedCategories.length > 0 || selectedBrands.length > 0"
+                @click="
+                  selectedCategories = [];
+                  selectedBrands = [];
+                  router.get('/pos', {
+                    search: searchInput,
+                    per_page: perPage,
+                    sort_by: sortBy,
+                    sort_direction: sortDirection
+                  }, { preserveState: true, replace: true });
+                "
+                class="py-1 px-2 ms-2 text-xs text-center rounded-md bg-red-200 dark:bg-red-900 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-200 transition-colors duration-300"
+              >
+                Reset Filter
+              </button>
+            </div>
+            <button
+              @click="filterOpen = false"
+              class="text-gray-500 hover:text-gray-700"
+            >
+              ✕
+            </button>
+          </div>
+
+          <!-- Isi filter scrollable -->
+          <div class="flex-1 overflow-y-auto p-4 text-gray-400 text-sm">
+
+                        
+          <!-- Jumlah Per Halaman -->
+          <h3 class="text-md font-semibold text-gray-700 dark:text-gray-200 mb-2">
+            Tampil per Halaman
+          </h3>
+          <div class="flex flex-wrap gap-2">
+            <button
+              v-for="n in [20, 50, 100, 500, 1000]"
+              :key="n"
+              @click="setPerPage(n)"
+              class="px-2 py-1 rounded-md border text-xs font-medium transition-colors duration-300"
+              :class="perPage === n
+                ? 'text-background border-gray-500 bg-gray-800 dark:bg-gray-100'
+                : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'"
+            >
+              {{ n }}
+            </button>
+          </div>
+            
+            <!-- Filter Sort -->
+            <h3 class="text-md font-semibold text-gray-700 dark:text-gray-200 mt-4 mb-2">
+              Urutkan Berdasarkan
+            </h3>
+
+            <div class="flex flex-col gap-2">
+              <select
+                v-model="sortBy"
+                @change="applyFilters"
+                class="w-full border rounded-md p-1 text-sm text-gray-800 dark:bg-gray-800 dark:text-white"
+              >
+                <option value="name">Nama Produk</option>
+                <option value="price">Harga</option>
+                <option value="created_at">Tanggal Dibuat</option>
+                <option value="updated_at">Tanggal Diubah</option>
+              </select>
+
+              <select
+                v-model="sortDirection"
+                @change="applyFilters"
+                class="w-full border rounded-md p-1 text-sm text-gray-800 dark:bg-gray-800 dark:text-white"
+              >
+                <option value="asc">Naik (A–Z / Murah–Mahal / Terlama)</option>
+                <option value="desc">Turun (Z–A / Mahal–Murah / Terbaru)</option>
+              </select>
+            </div>  
+
+            <!-- Filter Category -->
+            <h3 class="text-md font-semibold text-gray-700 dark:text-gray-200 mt-4 mb-2">
+              Kategori
+            </h3>
+
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="cat in categories"
+                :key="cat.id"
+                @click="toggleCategory(cat.id)"
+                class="px-2 py-1 rounded-full border text-xs font-medium transition-colors duration-300"
+                :class="selectedCategories.includes(cat.id)
+                  ? 'bg-blue-500 text-white border-blue-500'
+                  : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'"
+              >
+                {{ cat.name }}
+              </button>
+            </div>
+
+            <!-- Filter Brand -->
+            <h3 class="text-md font-semibold text-gray-700 dark:text-gray-200 mt-4 mb-2">
+              Brand
+            </h3>
+
+            <div class="flex flex-wrap gap-2">
+              <button
+                v-for="brand in brands"
+                :key="brand.id"
+                @click="toggleBrand(brand.id)"
+                class="px-2 py-1 rounded-full border text-xs font-medium transition-colors duration-300"
+                :class="selectedBrands.includes(brand.id)
+                  ? 'bg-green-500 text-white border-green-500'
+                  : 'bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-700'"
+              >
+                {{ brand.name }}
+              </button>
+            </div>  
+
+          </div>
+        </div>
+      </div>
+    </transition>
+
+    <!-- Checkout Modal -->
+    <CheckoutModal
+      v-model:open="checkoutOpen"
+      v-model:customerID="checkoutCustomerID"
+      v-model:userAlias="checkoutUserAlias"
+      v-model:notes="checkoutNotes"
+      v-model:paymentMethod="checkoutPaymentMethod"
+      v-model:date="checkoutDate"
+      v-model:orderType="checkoutOrderType"
+      :items="cartItems"
+      :users="users"
+      @done="onCheckoutDone"
+    />
+  </div>
+</template>
 
 
 <style scoped>

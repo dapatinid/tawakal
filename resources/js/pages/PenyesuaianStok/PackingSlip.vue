@@ -61,10 +61,10 @@ onMounted(() => {
     </div>
 
     <!-- Informasi Meta Surat Jalan -->
-    <div class="flex justify-between text-xs mb-3">
+    <div class="flex justify-between text-base mb-3">
       <table class="w-[45%]">
         <tr>
-          <td class="w-20 ">Dibuat Oleh</td>
+          <td class="w-28 ">Dibuat Oleh</td>
           <td class="w-2 ">:</td>
           <td>{{ props.adjustmentStock.user_cre?.name || 'Admin/Operator' }}</td>
         </tr>
@@ -77,7 +77,7 @@ onMounted(() => {
       
       <table class="w-[45%]">
         <tr>
-          <td class="w-20 ">Tanggal</td>
+          <td class="w-24 ">Tanggal</td>
           <td class="w-2 ">:</td>
           <td>{{ tanggalTransaksi }}</td>
         </tr>
@@ -90,30 +90,30 @@ onMounted(() => {
     </div>
 
     <!-- Tabel Daftar Barang -->
-    <table class="w-full text-xs border-collapse mb-4">
+    <table class="w-full border-collapse text-sm mb-4">
       <thead>
         <tr class="border-y border-black">
-          <th class="py-1 text-left w-2/12">Kode</th>
-          <th class="py-1 text-left w-4/12">Nama Produk</th>
-          <th class="py-1 text-left w-1/12">Section</th>
-          <th class="py-1 text-center w-1/12">Qty</th>
-          <th class="py-1 text-right w-4/12">Keterangan</th>
+          <th class="px-1 text-left">Kode</th>
+          <th class="px-1 text-left border-l border-black">Nama Produk</th>
+          <th class="px-1 text-left border-l border-black">Section</th>
+          <th class="px-1 text-center border-l border-black">Qty</th>
+          <th class="px-1 text-right border-l border-black">Keterangan</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="item in props.adjustmentStock.items" :key="item.id" class="border-b border-dashed border-gray-400">
-          <td class="py-1 align-top">{{ item.product?.code || item.product?.sku || '-' }}</td>
-          <td class="py-1 align-top">{{ item.product?.name || item.product_name }}</td>
-          <td class="py-1 align-top"></td>
+          <td class="px-1 align-top">{{ item.product?.code || item.product?.sku || '-' }}</td>
+          <td class="px-1 align-top border-l border-black">{{ item.product?.name || item.product_name }}</td>
+          <td class="px-1 align-top border-l border-black"></td>
           
           <!-- Qty (Menampilkan quantity_mins atau plus tergantung yang bernilai > 0) -->
-          <td class="py-1 text-center align-top font-semibold">
+          <td class="px-1 text-center align-top font-semibold border-l border-black">
             <span v-if="Number(item.quantity_mins) > 0">{{ item.quantity_mins }}</span>
             <span v-else>{{ item.quantity_plus }}</span>
           </td>
           
           <!-- Keterangan -->
-          <td class="py-1 text-right align-top">
+          <td class="px-1 text-right align-top border-l border-black text-nowrap">
             <span v-if="Number(item.totalweight) > 0">
               {{ Number(item.totalweight).toLocaleString('id-ID') }} kg [
             </span>
@@ -151,9 +151,9 @@ onMounted(() => {
 </template>
 
 <style scoped>
-/* Pengaturan Kertas Landscape dengan Lebar 19cm */
+/* Pengaturan Kertas Landscape dengan Lebar 21cm */
 .print-container {
-  width: 19cm;
+  width: 21cm;
   margin: 0 auto;
   font-family: monospace;
   color: black;
@@ -173,7 +173,7 @@ onMounted(() => {
   }
 
   .print-container {
-    width: 19cm;
+    width: 21cm;
     margin: 0;
   }
 }

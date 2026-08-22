@@ -40,7 +40,7 @@ onBeforeUnmount(() => {
     data-sidebar="content"
     class="sidebar-scroll"
     :class="cn(
-      'flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-hidden',
+      'flex min-h-0 flex-1 flex-col gap-2 overflow-auto group-data-[collapsible=icon]:overflow-x-hidden',
       props.class
     )"
   >
@@ -50,41 +50,17 @@ onBeforeUnmount(() => {
 
 <style scoped>
 /* ===============================
-   SIDEBAR SCROLLBAR (MINIMAL)
+   SIDEBAR SCROLLBAR (HIDDEN)
 =============================== */
 
-/* Firefox */
 .sidebar-scroll {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(120, 120, 120, 0.4) transparent;
+  /* Sembunyikan scrollbar untuk IE, Edge, dan Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-/* Chrome, Edge, Safari */
+/* Sembunyikan scrollbar untuk Chrome, Safari, dan Opera */
 .sidebar-scroll::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sidebar-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sidebar-scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(120, 120, 120, 0.35);
-  border-radius: 6px;
-}
-
-/* Hover */
-.sidebar-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(120, 120, 120, 0.55);
-}
-
-/* Dark mode */
-.dark .sidebar-scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(180, 180, 180, 0.25);
-}
-
-.dark .sidebar-scroll::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(180, 180, 180, 0.45);
+  display: none;
 }
 </style>
-
