@@ -16,6 +16,8 @@ import {
   ShieldCheck,
   Cog,
   ChevronRight,
+  X,
+  Settings,
 } from 'lucide-vue-next';
 import { ref, type Component } from 'vue';
 
@@ -52,7 +54,7 @@ const currentPath =
     <div class="py-4 gap-y-4 block md:flex md:flex-wrap pb-24">
 
         <!-- MOBILE SETTINGS BUTTON -->
-        <div class="fixed bottom-4 right-4 z-50 md:hidden">
+        <div class="fixed bottom-4 left-4 z-50 md:hidden">
         <Button
             variant="outline"
             class="
@@ -67,7 +69,7 @@ const currentPath =
             "
             @click="openSettings"
         >
-            <Cog class="size-5" />
+            <Settings class="size-5" />
             <span class="sr-only">Pengaturan</span>
         </Button>
         </div>
@@ -161,12 +163,13 @@ const currentPath =
         >
             <!-- HEADER -->
             <div class="flex items-center justify-between px-6 pt-3">
+            <Settings class="size-5 text-blue-600" />
             <h3 class="text-base font-semibold">Pengaturan</h3>
             <button
-                class="text-sm text-blue-600"
+                class="text-sm text-red-400"
                 @click="closeSettings"
             >
-                Tutup
+                <X class="size-5" />
             </button>
             </div>
 
