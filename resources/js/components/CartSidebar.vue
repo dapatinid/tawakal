@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, watch, nextTick } from "vue";
-import { Trash2, ArrowLeft } from 'lucide-vue-next';
+import { Trash2, ArrowLeft, Settings } from 'lucide-vue-next';
 import { Link } from "@inertiajs/vue3";
 
 const props = defineProps({
@@ -202,7 +202,7 @@ function runOrderImport() {
                 @click="showMarkup = !showMarkup" 
                 class="text-[10px] sm:text-xs font-normal bg-gray-200 hover:bg-gray-300 dark:bg-gray-800 dark:hover:bg-gray-700 px-2 py-0.5 rounded cursor-pointer transition-colors"
               >
-                Set Harga
+                <Settings class="size-4" />
               </button>
             </div>
             <span>Rp{{ formatPrice(subtotal) }}</span>
