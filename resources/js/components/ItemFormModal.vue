@@ -30,6 +30,9 @@ const form = reactive({
   stock: 0,
   quantity_mins: 1,
   subtotal: 0,
+ cost: 0,
+  markup_nominal: 0,
+  markup_percent: 0, 
 });
 
 // Load data saat modal open
@@ -50,11 +53,14 @@ watch(
   () => form.product_id,
   (id) => {
     if (!id) return;
-    // Gunakan perbandingan String
     const product = props.products.find((p) => String(p.id) === String(id));
     if (product) {
+      form.cost = Number(product.cost) || 0; // <--- Tarik data cost
       form.price = Number(product.price) || 0;
       form.stock = Number(product.stock) || 0;
+      
+      // Sinkronkan margin awal saat produk di-load
+      updateFromPrice(); 
     }
   }
 );
@@ -80,6 +86,30 @@ function submit() {
     price: Number(form.price),
     subtotal: form.subtotal,
   });
+}
+
+// Dijalankan saat "Harga" diubah manual
+function updateFromPrice() {
+  if (form.cost > 0) {
+    form.markup_nominal = form.price - form.cost;
+    form.markup_percent = Number(((form.markup_nominal / form.cost) * 100).toFixed(2));
+  }
+}
+
+// Dijalankan saat "Nominal (+2000)" diubah
+function updateFromNominal() {
+  if (form.cost > 0) {
+    form.markup_percent = Number(((form.markup_nominal / form.cost) * 100).toFixed(2));
+    form.price = form.cost + form.markup_nominal;
+  }
+}
+
+// Dijalankan saat "Persentase (10%)" diubah
+function updateFromPercent() {
+  if (form.cost > 0) {
+    form.markup_nominal = Number((form.cost * (form.markup_percent / 100)).toFixed(0));
+    form.price = form.cost + form.markup_nominal;
+  }
 }
 </script>
 
@@ -107,7 +137,7 @@ function submit() {
         />
       </div>     
 
-        <!-- Price -->
+      <!-- Price -->
         <div>
           <Label class="mb-2">Harga</Label>
           <Input
@@ -115,7 +145,29 @@ function submit() {
             type="number"
             min="0"
             class="dark:bg-neutral-900 dark:text-white"
+            @input="updateFromPrice"
           />
+          
+          <!-- Tambahan Margin/Markup -->
+          <div class="flex items-center gap-1.5 mt-2 text-xs text-muted-foreground">
+            <span>harga</span>
+            <Input 
+              v-model.number="form.markup_nominal" 
+              type="number" 
+              min="0"
+              class="h-7 w-24 px-2 text-xs dark:bg-neutral-900 dark:text-white" 
+              @input="updateFromNominal"
+            />
+            <span>(</span>
+            <Input 
+              v-model.number="form.markup_percent" 
+              type="number" 
+              min="0"
+              class="h-7 w-24 px-2 text-center text-xs dark:bg-neutral-900 dark:text-white" 
+              @input="updateFromPercent"
+            />
+            <span>%) dari cost</span>
+          </div>
         </div>
 
         <!-- Qty -->

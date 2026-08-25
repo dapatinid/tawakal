@@ -280,7 +280,7 @@ const formatDateTime = (dateString) => {
                         <tbody class="divide-y divide-gray-100">
                             <tr v-for="(item, index) in sortedProducts" :key="item.id" class="hover:bg-blue-100/50" :class="{'bg-yellow-50/50': item.queue_act}">
                                 <td class="px-2 py-1 text-center"><input type="checkbox" :value="item.id" v-model="selectedIds" class="rounded border-gray-300"></td>
-                                <td class="px-2 py-1 text-center text-gray-500">{{ index + 1 }}</td>
+                                <td class="px-2 py-1 text-center text-gray-500">{{ (props.products.from || 1) + index }}</td>
                                 <td class="px-2 py-1 font-medium">
                                     {{ item.name }}
                                     <span v-if="item.queue_act" class="ml-1 text-[10px] bg-yellow-200 text-yellow-800 px-1 rounded">Antre</span>

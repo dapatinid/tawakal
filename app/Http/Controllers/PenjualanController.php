@@ -395,7 +395,7 @@ public function index(Request $request)
                 ->where('mutation_type', 'Penjualan')
                 ->orderBy('date', 'asc'),
         ]);
-        $products = Product::select('id','name','price','stock')->whereBranchId(Auth::user()->branch_id)->where('is_active', true)->orderBy('name')->get();
+        $products = Product::select('id','name', 'cost','price','stock')->whereBranchId(Auth::user()->branch_id)->where('is_active', true)->orderBy('name')->get();
         return Inertia::render('Penjualan/Show', [
             'order' => $order,
             'products' => $products,
