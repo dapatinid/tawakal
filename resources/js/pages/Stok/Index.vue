@@ -437,7 +437,7 @@ const exportUrl = computed(() => {
 
             <!-- Empty -->
             <tr v-if="groupedData.length === 0">
-              <td colspan="10" class="px-6 py-10 text-center text-gray-500 dark:text-gray-400">
+              <td colspan="14" class="px-6 py-10 text-center text-gray-500 dark:text-gray-400">
                 Tidak ada data yang sesuai filter
               </td>
             </tr>
@@ -546,7 +546,7 @@ const exportUrl = computed(() => {
 
             <!-- Empty -->
             <tr v-if="stokList.data.length === 0">
-              <td colspan="12" class="px-6 py-10 text-center text-gray-500 dark:text-gray-400">
+              <td colspan="13" class="px-6 py-10 text-center text-gray-500 dark:text-gray-400">
                 Data stok belum tersedia
               </td>
             </tr>
