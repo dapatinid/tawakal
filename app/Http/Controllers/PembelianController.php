@@ -471,6 +471,12 @@ public function index(Request $request)
             'type' => 'required|in:dine_in,self_pickup,delivery',
         ]);
 
+        $totalPayment = $purchaseOrder->payments()->sum('nominal_mins');
+
+        if ($request->status === 'canceled' && $totalPayment > 0) {
+                return back()->with('error', 'Nol-kan payment yang sudah ada untuk bisa cancel.');     
+        }
+
         $purchaseOrder->update([
             'date'   => $request->date,
             'status' => $request->status,
