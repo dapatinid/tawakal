@@ -77,9 +77,12 @@ class JournalController extends Controller
         // FILTER PAYMENT METHOD
         // =======================
         if ($request->filled('akun_akun')) {
-            $baseQuery->where(function ($q) use ($request) {
-                $q->where('debit_akun', $request->akun_akun)
-                ->orWhere('kredit_akun', $request->akun_akun);
+            // Ubah input menjadi lowercase untuk dicocokkan dengan database
+            $akunAkun = strtolower($request->akun_akun);
+            
+            $baseQuery->where(function ($q) use ($akunAkun) {
+                $q->whereRaw('LOWER(debit_akun) = ?', [$akunAkun])
+                  ->orWhereRaw('LOWER(kredit_akun) = ?', [$akunAkun]);
             });
         }
 
@@ -131,10 +134,12 @@ class JournalController extends Controller
         // =======================
         // SUMMARY (total_nominal)
         // =======================
+        $akunSummary = $request->akun_akun ? strtolower($request->akun_akun) : '';
+        
         $summary = [
             'total_nominal' => 
-                (clone $baseQuery)->where('debit_akun', $request->akun_akun)->sum('nominal')
-            - (clone $baseQuery)->where('kredit_akun', $request->akun_akun)->sum('nominal'),
+                (clone $baseQuery)->whereRaw('LOWER(debit_akun) = ?', [$akunSummary])->sum('nominal')
+              - (clone $baseQuery)->whereRaw('LOWER(kredit_akun) = ?', [$akunSummary])->sum('nominal'),
         ];
 
         // =======================
