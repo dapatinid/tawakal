@@ -17,6 +17,7 @@ const admins = computed(() => page.props.admins ?? [])
 const dateFrom = ref(page.props.filters?.date_from ?? '')
 const dateTo = ref(page.props.filters?.date_to ?? '')
 const paymentMethod = ref(page.props.filters?.payment_method ?? '')
+const transactionType = ref(page.props.filters?.transaction_type ?? '') // <-- tambah
 const userAdmin = ref<number | null>(page.props.filters?.user_admin ?? null)
 const userId = ref(page.props.filters?.user_id ?? null)
 const search = ref(page.props.filters?.search ?? '')
@@ -71,7 +72,7 @@ const breadcrumbs = [{ title: 'Pembayaran', href: '/pembayaran' }]
 
 // ===== WATCH FILTER =====
 watch(
-  [dateFrom, dateTo, paymentMethod, orderBy, orderDir, userId, search, userAdmin],
+  [dateFrom, dateTo, paymentMethod, transactionType, orderBy, orderDir, userId, search, userAdmin],
   debounce(() => {
     router.get(
       '/pembayaran',
@@ -79,6 +80,7 @@ watch(
         date_from: dateFrom.value || undefined,
         date_to: dateTo.value || undefined,
         payment_method: paymentMethod.value || undefined,
+        transaction_type: transactionType.value || undefined,
         user_id: userId.value || undefined,
         search: search.value || undefined,
         order_by: orderBy.value,
@@ -95,6 +97,7 @@ const resetFilter = () => {
   dateFrom.value = ''
   dateTo.value = ''
   paymentMethod.value = ''
+  transactionType.value = '' 
   userAdmin.value = null
   userId.value = null
   search.value = ''
@@ -107,6 +110,7 @@ const activeFilters = computed(() => ({
   date_from: dateFrom.value || undefined,
   date_to: dateTo.value || undefined,
   payment_method: paymentMethod.value || undefined,
+  transaction_type: transactionType.value || undefined, 
   user_id: userId.value ?? undefined,
   user_admin: userAdmin.value ?? undefined,
   search: search.value || undefined,
@@ -290,6 +294,17 @@ function setYesterday() {
           >
             {{ m.label }}
           </option>
+        </select>    
+        
+        <select
+          v-model="transactionType"
+          class="px-3 py-2 rounded-lg text-sm
+                bg-white dark:bg-gray-900
+                border border-gray-300 dark:border-gray-600"
+        >
+          <option value="">Semua Tr</option>
+          <option value="jual">Hanya Jual</option>
+          <option value="beli">Hanya Beli</option>
         </select>        
       </div>
 

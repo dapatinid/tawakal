@@ -87,6 +87,15 @@ class PembayaranController extends Controller
         }
 
         // =======================
+        // FILTER JENIS TRANSAKSI (SEMUA / JUAL / BELI)
+        // =======================
+        if ($request->transaction_type === 'jual') {
+            $baseQuery->where('mutation_type', 'Penjualan');
+        } elseif ($request->transaction_type === 'beli') {
+            $baseQuery->where('mutation_type', 'Pembelian');
+        }
+
+        // =======================
         // SEARCH (USER NAME, MUTATION, POLYMORPHIC USER_ALIAS)
         // =======================
         if ($request->filled('search')) {
@@ -173,6 +182,7 @@ class PembayaranController extends Controller
                 'order_by' => $orderBy,
                 'order_dir' => $orderDir,
                 'user_admin' => $request->user_admin,
+                'transaction_type' => $request->transaction_type,
             ],
         ]);
     }

@@ -4,7 +4,7 @@ import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFo
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-export const index = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const index = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: index.url(args, options),
     method: 'get',
 })
@@ -19,7 +19,7 @@ index.definition = {
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-index.url = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions) => {
+index.url = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { branch: args }
     }
@@ -52,7 +52,7 @@ index.url = (args: { branch: string | { slug: string } } | [branch: string | { s
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-index.get = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+index.get = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: index.url(args, options),
     method: 'get',
 })
@@ -62,7 +62,7 @@ index.get = (args: { branch: string | { slug: string } } | [branch: string | { s
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-index.head = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+index.head = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: index.url(args, options),
     method: 'head',
 })
@@ -72,7 +72,7 @@ index.head = (args: { branch: string | { slug: string } } | [branch: string | { 
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-const indexForm = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const indexForm = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: index.url(args, options),
     method: 'get',
 })
@@ -82,7 +82,7 @@ const indexForm = (args: { branch: string | { slug: string } } | [branch: string
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-indexForm.get = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+indexForm.get = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: index.url(args, options),
     method: 'get',
 })
@@ -92,7 +92,7 @@ indexForm.get = (args: { branch: string | { slug: string } } | [branch: string |
 * @see app/Http/Controllers/OrderNowController.php:16
 * @route '/@{branch}'
 */
-indexForm.head = (args: { branch: string | { slug: string } } | [branch: string | { slug: string } ] | string | { slug: string }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+indexForm.head = (args: { branch: string | number | { slug: string | number } } | [branch: string | number | { slug: string | number } ] | string | number | { slug: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: index.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',

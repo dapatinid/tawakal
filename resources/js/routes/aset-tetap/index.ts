@@ -222,7 +222,7 @@ store.form = storeForm
 * @see app/Http/Controllers/AsetTetapController.php:140
 * @route '/aset-tetap/{asetTetap}'
 */
-export const show = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const show = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -237,7 +237,7 @@ show.definition = {
 * @see app/Http/Controllers/AsetTetapController.php:140
 * @route '/aset-tetap/{asetTetap}'
 */
-show.url = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+show.url = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { asetTetap: args }
     }
@@ -270,7 +270,7 @@ show.url = (args: { asetTetap: number | { id: number } } | [asetTetap: number | 
 * @see app/Http/Controllers/AsetTetapController.php:140
 * @route '/aset-tetap/{asetTetap}'
 */
-show.get = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+show.get = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: show.url(args, options),
     method: 'get',
 })
@@ -280,7 +280,7 @@ show.get = (args: { asetTetap: number | { id: number } } | [asetTetap: number | 
 * @see app/Http/Controllers/AsetTetapController.php:140
 * @route '/aset-tetap/{asetTetap}'
 */
-show.head = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+show.head = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: show.url(args, options),
     method: 'head',
 })
@@ -290,7 +290,7 @@ show.head = (args: { asetTetap: number | { id: number } } | [asetTetap: number |
 * @see app/Http/Controllers/AsetTetapController.php:140
 * @route '/aset-tetap/{asetTetap}'
 */
-const showForm = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const showForm = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -300,7 +300,7 @@ const showForm = (args: { asetTetap: number | { id: number } } | [asetTetap: num
 * @see app/Http/Controllers/AsetTetapController.php:140
 * @route '/aset-tetap/{asetTetap}'
 */
-showForm.get = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.get = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, options),
     method: 'get',
 })
@@ -310,7 +310,7 @@ showForm.get = (args: { asetTetap: number | { id: number } } | [asetTetap: numbe
 * @see app/Http/Controllers/AsetTetapController.php:140
 * @route '/aset-tetap/{asetTetap}'
 */
-showForm.head = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+showForm.head = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: show.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -327,7 +327,7 @@ show.form = showForm
 * @see app/Http/Controllers/AsetTetapController.php:152
 * @route '/aset-tetap/{asetTetap}/depreciate'
 */
-export const depreciate = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+export const depreciate = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: depreciate.url(args, options),
     method: 'put',
 })
@@ -342,7 +342,7 @@ depreciate.definition = {
 * @see app/Http/Controllers/AsetTetapController.php:152
 * @route '/aset-tetap/{asetTetap}/depreciate'
 */
-depreciate.url = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+depreciate.url = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { asetTetap: args }
     }
@@ -375,7 +375,7 @@ depreciate.url = (args: { asetTetap: number | { id: number } } | [asetTetap: num
 * @see app/Http/Controllers/AsetTetapController.php:152
 * @route '/aset-tetap/{asetTetap}/depreciate'
 */
-depreciate.put = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
+depreciate.put = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
     url: depreciate.url(args, options),
     method: 'put',
 })
@@ -385,7 +385,7 @@ depreciate.put = (args: { asetTetap: number | { id: number } } | [asetTetap: num
 * @see app/Http/Controllers/AsetTetapController.php:152
 * @route '/aset-tetap/{asetTetap}/depreciate'
 */
-const depreciateForm = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const depreciateForm = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: depreciate.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -400,7 +400,7 @@ const depreciateForm = (args: { asetTetap: number | { id: number } } | [asetTeta
 * @see app/Http/Controllers/AsetTetapController.php:152
 * @route '/aset-tetap/{asetTetap}/depreciate'
 */
-depreciateForm.put = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+depreciateForm.put = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: depreciate.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PUT',
@@ -417,7 +417,7 @@ depreciate.form = depreciateForm
 * @see app/Http/Controllers/AsetTetapController.php:195
 * @route '/aset-tetap/{aset_tetap}/sell'
 */
-export const sell = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const sell = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: sell.url(args, options),
     method: 'post',
 })
@@ -432,7 +432,7 @@ sell.definition = {
 * @see app/Http/Controllers/AsetTetapController.php:195
 * @route '/aset-tetap/{aset_tetap}/sell'
 */
-sell.url = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+sell.url = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { aset_tetap: args }
     }
@@ -465,7 +465,7 @@ sell.url = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number 
 * @see app/Http/Controllers/AsetTetapController.php:195
 * @route '/aset-tetap/{aset_tetap}/sell'
 */
-sell.post = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+sell.post = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: sell.url(args, options),
     method: 'post',
 })
@@ -475,7 +475,7 @@ sell.post = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number
 * @see app/Http/Controllers/AsetTetapController.php:195
 * @route '/aset-tetap/{aset_tetap}/sell'
 */
-const sellForm = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const sellForm = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: sell.url(args, options),
     method: 'post',
 })
@@ -485,7 +485,7 @@ const sellForm = (args: { aset_tetap: number | { id: number } } | [aset_tetap: n
 * @see app/Http/Controllers/AsetTetapController.php:195
 * @route '/aset-tetap/{aset_tetap}/sell'
 */
-sellForm.post = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+sellForm.post = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: sell.url(args, options),
     method: 'post',
 })
@@ -497,7 +497,7 @@ sell.form = sellForm
 * @see app/Http/Controllers/AsetTetapController.php:293
 * @route '/aset-tetap/{aset_tetap}/dispose'
 */
-export const dispose = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const dispose = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: dispose.url(args, options),
     method: 'post',
 })
@@ -512,7 +512,7 @@ dispose.definition = {
 * @see app/Http/Controllers/AsetTetapController.php:293
 * @route '/aset-tetap/{aset_tetap}/dispose'
 */
-dispose.url = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+dispose.url = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { aset_tetap: args }
     }
@@ -545,7 +545,7 @@ dispose.url = (args: { aset_tetap: number | { id: number } } | [aset_tetap: numb
 * @see app/Http/Controllers/AsetTetapController.php:293
 * @route '/aset-tetap/{aset_tetap}/dispose'
 */
-dispose.post = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+dispose.post = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: dispose.url(args, options),
     method: 'post',
 })
@@ -555,7 +555,7 @@ dispose.post = (args: { aset_tetap: number | { id: number } } | [aset_tetap: num
 * @see app/Http/Controllers/AsetTetapController.php:293
 * @route '/aset-tetap/{aset_tetap}/dispose'
 */
-const disposeForm = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const disposeForm = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: dispose.url(args, options),
     method: 'post',
 })
@@ -565,7 +565,7 @@ const disposeForm = (args: { aset_tetap: number | { id: number } } | [aset_tetap
 * @see app/Http/Controllers/AsetTetapController.php:293
 * @route '/aset-tetap/{aset_tetap}/dispose'
 */
-disposeForm.post = (args: { aset_tetap: number | { id: number } } | [aset_tetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+disposeForm.post = (args: { aset_tetap: string | number | { id: string | number } } | [aset_tetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: dispose.url(args, options),
     method: 'post',
 })
@@ -577,7 +577,7 @@ dispose.form = disposeForm
 * @see app/Http/Controllers/AsetTetapController.php:340
 * @route '/aset-tetap/{asetTetap}/archive'
 */
-export const archive = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const archive = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: archive.url(args, options),
     method: 'patch',
 })
@@ -592,7 +592,7 @@ archive.definition = {
 * @see app/Http/Controllers/AsetTetapController.php:340
 * @route '/aset-tetap/{asetTetap}/archive'
 */
-archive.url = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+archive.url = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { asetTetap: args }
     }
@@ -625,7 +625,7 @@ archive.url = (args: { asetTetap: number | { id: number } } | [asetTetap: number
 * @see app/Http/Controllers/AsetTetapController.php:340
 * @route '/aset-tetap/{asetTetap}/archive'
 */
-archive.patch = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+archive.patch = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: archive.url(args, options),
     method: 'patch',
 })
@@ -635,7 +635,7 @@ archive.patch = (args: { asetTetap: number | { id: number } } | [asetTetap: numb
 * @see app/Http/Controllers/AsetTetapController.php:340
 * @route '/aset-tetap/{asetTetap}/archive'
 */
-const archiveForm = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const archiveForm = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: archive.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -650,7 +650,7 @@ const archiveForm = (args: { asetTetap: number | { id: number } } | [asetTetap: 
 * @see app/Http/Controllers/AsetTetapController.php:340
 * @route '/aset-tetap/{asetTetap}/archive'
 */
-archiveForm.patch = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+archiveForm.patch = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: archive.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -667,7 +667,7 @@ archive.form = archiveForm
 * @see app/Http/Controllers/AsetTetapController.php:357
 * @route '/aset-tetap/{asetTetap}'
 */
-export const destroy = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -682,7 +682,7 @@ destroy.definition = {
 * @see app/Http/Controllers/AsetTetapController.php:357
 * @route '/aset-tetap/{asetTetap}'
 */
-destroy.url = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { asetTetap: args }
     }
@@ -715,7 +715,7 @@ destroy.url = (args: { asetTetap: number | { id: number } } | [asetTetap: number
 * @see app/Http/Controllers/AsetTetapController.php:357
 * @route '/aset-tetap/{asetTetap}'
 */
-destroy.delete = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -725,7 +725,7 @@ destroy.delete = (args: { asetTetap: number | { id: number } } | [asetTetap: num
 * @see app/Http/Controllers/AsetTetapController.php:357
 * @route '/aset-tetap/{asetTetap}'
 */
-const destroyForm = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -740,7 +740,7 @@ const destroyForm = (args: { asetTetap: number | { id: number } } | [asetTetap: 
 * @see app/Http/Controllers/AsetTetapController.php:357
 * @route '/aset-tetap/{asetTetap}'
 */
-destroyForm.delete = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -757,7 +757,7 @@ destroy.form = destroyForm
 * @see app/Http/Controllers/AsetTetapController.php:369
 * @route '/aset-tetap/{asetTetap}/pay'
 */
-export const pay = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+export const pay = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: pay.url(args, options),
     method: 'post',
 })
@@ -772,7 +772,7 @@ pay.definition = {
 * @see app/Http/Controllers/AsetTetapController.php:369
 * @route '/aset-tetap/{asetTetap}/pay'
 */
-pay.url = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
+pay.url = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { asetTetap: args }
     }
@@ -805,7 +805,7 @@ pay.url = (args: { asetTetap: number | { id: number } } | [asetTetap: number | {
 * @see app/Http/Controllers/AsetTetapController.php:369
 * @route '/aset-tetap/{asetTetap}/pay'
 */
-pay.post = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
+pay.post = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'post'> => ({
     url: pay.url(args, options),
     method: 'post',
 })
@@ -815,7 +815,7 @@ pay.post = (args: { asetTetap: number | { id: number } } | [asetTetap: number | 
 * @see app/Http/Controllers/AsetTetapController.php:369
 * @route '/aset-tetap/{asetTetap}/pay'
 */
-const payForm = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const payForm = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: pay.url(args, options),
     method: 'post',
 })
@@ -825,7 +825,7 @@ const payForm = (args: { asetTetap: number | { id: number } } | [asetTetap: numb
 * @see app/Http/Controllers/AsetTetapController.php:369
 * @route '/aset-tetap/{asetTetap}/pay'
 */
-payForm.post = (args: { asetTetap: number | { id: number } } | [asetTetap: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+payForm.post = (args: { asetTetap: string | number | { id: string | number } } | [asetTetap: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: pay.url(args, options),
     method: 'post',
 })
