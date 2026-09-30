@@ -1,7 +1,7 @@
 import { queryParams, type RouteQueryOptions, type RouteDefinition, type RouteFormDefinition, applyUrlDefaults } from './../../../wayfinder'
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:1011
+* @see app/Http/Controllers/JournalController.php:1016
 * @route '/jurnal-transfer/store'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -16,7 +16,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:1011
+* @see app/Http/Controllers/JournalController.php:1016
 * @route '/jurnal-transfer/store'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -25,7 +25,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:1011
+* @see app/Http/Controllers/JournalController.php:1016
 * @route '/jurnal-transfer/store'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -35,7 +35,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:1011
+* @see app/Http/Controllers/JournalController.php:1016
 * @route '/jurnal-transfer/store'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -45,7 +45,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:1011
+* @see app/Http/Controllers/JournalController.php:1016
 * @route '/jurnal-transfer/store'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -240,7 +240,7 @@ update.form = updateForm
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:1116
+* @see app/Http/Controllers/JournalController.php:1121
 * @route '/jurnal-transfer/{journal}'
 */
 export const destroy = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -255,7 +255,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:1116
+* @see app/Http/Controllers/JournalController.php:1121
 * @route '/jurnal-transfer/{journal}'
 */
 destroy.url = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -288,7 +288,7 @@ destroy.url = (args: { journal: string | number | { id: string | number } } | [j
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:1116
+* @see app/Http/Controllers/JournalController.php:1121
 * @route '/jurnal-transfer/{journal}'
 */
 destroy.delete = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -298,7 +298,7 @@ destroy.delete = (args: { journal: string | number | { id: string | number } } |
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:1116
+* @see app/Http/Controllers/JournalController.php:1121
 * @route '/jurnal-transfer/{journal}'
 */
 const destroyForm = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -313,7 +313,7 @@ const destroyForm = (args: { journal: string | number | { id: string | number } 
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:1116
+* @see app/Http/Controllers/JournalController.php:1121
 * @route '/jurnal-transfer/{journal}'
 */
 destroyForm.delete = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({

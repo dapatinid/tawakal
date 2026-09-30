@@ -83,7 +83,7 @@ index.form = indexForm
 
 /**
 * @see \App\Http\Controllers\JournalController::create
-* @see app/Http/Controllers/JournalController.php:198
+* @see app/Http/Controllers/JournalController.php:203
 * @route '/jurnal/create'
 */
 export const create = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -98,7 +98,7 @@ create.definition = {
 
 /**
 * @see \App\Http\Controllers\JournalController::create
-* @see app/Http/Controllers/JournalController.php:198
+* @see app/Http/Controllers/JournalController.php:203
 * @route '/jurnal/create'
 */
 create.url = (options?: RouteQueryOptions) => {
@@ -107,7 +107,7 @@ create.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\JournalController::create
-* @see app/Http/Controllers/JournalController.php:198
+* @see app/Http/Controllers/JournalController.php:203
 * @route '/jurnal/create'
 */
 create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -117,7 +117,7 @@ create.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\JournalController::create
-* @see app/Http/Controllers/JournalController.php:198
+* @see app/Http/Controllers/JournalController.php:203
 * @route '/jurnal/create'
 */
 create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -127,7 +127,7 @@ create.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\JournalController::create
-* @see app/Http/Controllers/JournalController.php:198
+* @see app/Http/Controllers/JournalController.php:203
 * @route '/jurnal/create'
 */
 const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -137,7 +137,7 @@ const createForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \App\Http\Controllers\JournalController::create
-* @see app/Http/Controllers/JournalController.php:198
+* @see app/Http/Controllers/JournalController.php:203
 * @route '/jurnal/create'
 */
 createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -147,7 +147,7 @@ createForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\JournalController::create
-* @see app/Http/Controllers/JournalController.php:198
+* @see app/Http/Controllers/JournalController.php:203
 * @route '/jurnal/create'
 */
 createForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -164,7 +164,7 @@ create.form = createForm
 
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:212
+* @see app/Http/Controllers/JournalController.php:217
 * @route '/jurnal/store'
 */
 export const store = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -179,7 +179,7 @@ store.definition = {
 
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:212
+* @see app/Http/Controllers/JournalController.php:217
 * @route '/jurnal/store'
 */
 store.url = (options?: RouteQueryOptions) => {
@@ -188,7 +188,7 @@ store.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:212
+* @see app/Http/Controllers/JournalController.php:217
 * @route '/jurnal/store'
 */
 store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
@@ -198,7 +198,7 @@ store.post = (options?: RouteQueryOptions): RouteDefinition<'post'> => ({
 
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:212
+* @see app/Http/Controllers/JournalController.php:217
 * @route '/jurnal/store'
 */
 const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -208,7 +208,7 @@ const storeForm = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => 
 
 /**
 * @see \App\Http\Controllers\JournalController::store
-* @see app/Http/Controllers/JournalController.php:212
+* @see app/Http/Controllers/JournalController.php:217
 * @route '/jurnal/store'
 */
 storeForm.post = (options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -220,7 +220,7 @@ store.form = storeForm
 
 /**
 * @see \App\Http\Controllers\JournalController::edit
-* @see app/Http/Controllers/JournalController.php:284
+* @see app/Http/Controllers/JournalController.php:289
 * @route '/jurnal/{journal}/edit'
 */
 export const edit = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -235,7 +235,7 @@ edit.definition = {
 
 /**
 * @see \App\Http\Controllers\JournalController::edit
-* @see app/Http/Controllers/JournalController.php:284
+* @see app/Http/Controllers/JournalController.php:289
 * @route '/jurnal/{journal}/edit'
 */
 edit.url = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -268,7 +268,7 @@ edit.url = (args: { journal: string | number | { id: string | number } } | [jour
 
 /**
 * @see \App\Http\Controllers\JournalController::edit
-* @see app/Http/Controllers/JournalController.php:284
+* @see app/Http/Controllers/JournalController.php:289
 * @route '/jurnal/{journal}/edit'
 */
 edit.get = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -278,7 +278,7 @@ edit.get = (args: { journal: string | number | { id: string | number } } | [jour
 
 /**
 * @see \App\Http\Controllers\JournalController::edit
-* @see app/Http/Controllers/JournalController.php:284
+* @see app/Http/Controllers/JournalController.php:289
 * @route '/jurnal/{journal}/edit'
 */
 edit.head = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -288,7 +288,7 @@ edit.head = (args: { journal: string | number | { id: string | number } } | [jou
 
 /**
 * @see \App\Http\Controllers\JournalController::edit
-* @see app/Http/Controllers/JournalController.php:284
+* @see app/Http/Controllers/JournalController.php:289
 * @route '/jurnal/{journal}/edit'
 */
 const editForm = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -298,7 +298,7 @@ const editForm = (args: { journal: string | number | { id: string | number } } |
 
 /**
 * @see \App\Http\Controllers\JournalController::edit
-* @see app/Http/Controllers/JournalController.php:284
+* @see app/Http/Controllers/JournalController.php:289
 * @route '/jurnal/{journal}/edit'
 */
 editForm.get = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -308,7 +308,7 @@ editForm.get = (args: { journal: string | number | { id: string | number } } | [
 
 /**
 * @see \App\Http\Controllers\JournalController::edit
-* @see app/Http/Controllers/JournalController.php:284
+* @see app/Http/Controllers/JournalController.php:289
 * @route '/jurnal/{journal}/edit'
 */
 editForm.head = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -325,7 +325,7 @@ edit.form = editForm
 
 /**
 * @see \App\Http\Controllers\JournalController::update
-* @see app/Http/Controllers/JournalController.php:312
+* @see app/Http/Controllers/JournalController.php:317
 * @route '/jurnal/{journal}'
 */
 export const update = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -340,7 +340,7 @@ update.definition = {
 
 /**
 * @see \App\Http\Controllers\JournalController::update
-* @see app/Http/Controllers/JournalController.php:312
+* @see app/Http/Controllers/JournalController.php:317
 * @route '/jurnal/{journal}'
 */
 update.url = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -373,7 +373,7 @@ update.url = (args: { journal: string | number | { id: string | number } } | [jo
 
 /**
 * @see \App\Http\Controllers\JournalController::update
-* @see app/Http/Controllers/JournalController.php:312
+* @see app/Http/Controllers/JournalController.php:317
 * @route '/jurnal/{journal}'
 */
 update.put = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'put'> => ({
@@ -383,7 +383,7 @@ update.put = (args: { journal: string | number | { id: string | number } } | [jo
 
 /**
 * @see \App\Http\Controllers\JournalController::update
-* @see app/Http/Controllers/JournalController.php:312
+* @see app/Http/Controllers/JournalController.php:317
 * @route '/jurnal/{journal}'
 */
 const updateForm = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -398,7 +398,7 @@ const updateForm = (args: { journal: string | number | { id: string | number } }
 
 /**
 * @see \App\Http\Controllers\JournalController::update
-* @see app/Http/Controllers/JournalController.php:312
+* @see app/Http/Controllers/JournalController.php:317
 * @route '/jurnal/{journal}'
 */
 updateForm.put = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -415,7 +415,7 @@ update.form = updateForm
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:394
+* @see app/Http/Controllers/JournalController.php:399
 * @route '/jurnal/{journal}'
 */
 export const destroy = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -430,7 +430,7 @@ destroy.definition = {
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:394
+* @see app/Http/Controllers/JournalController.php:399
 * @route '/jurnal/{journal}'
 */
 destroy.url = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
@@ -463,7 +463,7 @@ destroy.url = (args: { journal: string | number | { id: string | number } } | [j
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:394
+* @see app/Http/Controllers/JournalController.php:399
 * @route '/jurnal/{journal}'
 */
 destroy.delete = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
@@ -473,7 +473,7 @@ destroy.delete = (args: { journal: string | number | { id: string | number } } |
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:394
+* @see app/Http/Controllers/JournalController.php:399
 * @route '/jurnal/{journal}'
 */
 const destroyForm = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -488,7 +488,7 @@ const destroyForm = (args: { journal: string | number | { id: string | number } 
 
 /**
 * @see \App\Http\Controllers\JournalController::destroy
-* @see app/Http/Controllers/JournalController.php:394
+* @see app/Http/Controllers/JournalController.php:399
 * @route '/jurnal/{journal}'
 */
 destroyForm.delete = (args: { journal: string | number | { id: string | number } } | [journal: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
@@ -505,7 +505,7 @@ destroy.form = destroyForm
 
 /**
 * @see \App\Http\Controllers\JournalController::transfer
-* @see app/Http/Controllers/JournalController.php:1001
+* @see app/Http/Controllers/JournalController.php:1006
 * @route '/jurnal-transfer'
 */
 export const transfer = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -520,7 +520,7 @@ transfer.definition = {
 
 /**
 * @see \App\Http\Controllers\JournalController::transfer
-* @see app/Http/Controllers/JournalController.php:1001
+* @see app/Http/Controllers/JournalController.php:1006
 * @route '/jurnal-transfer'
 */
 transfer.url = (options?: RouteQueryOptions) => {
@@ -529,7 +529,7 @@ transfer.url = (options?: RouteQueryOptions) => {
 
 /**
 * @see \App\Http\Controllers\JournalController::transfer
-* @see app/Http/Controllers/JournalController.php:1001
+* @see app/Http/Controllers/JournalController.php:1006
 * @route '/jurnal-transfer'
 */
 transfer.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
@@ -539,7 +539,7 @@ transfer.get = (options?: RouteQueryOptions): RouteDefinition<'get'> => ({
 
 /**
 * @see \App\Http\Controllers\JournalController::transfer
-* @see app/Http/Controllers/JournalController.php:1001
+* @see app/Http/Controllers/JournalController.php:1006
 * @route '/jurnal-transfer'
 */
 transfer.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
@@ -549,7 +549,7 @@ transfer.head = (options?: RouteQueryOptions): RouteDefinition<'head'> => ({
 
 /**
 * @see \App\Http\Controllers\JournalController::transfer
-* @see app/Http/Controllers/JournalController.php:1001
+* @see app/Http/Controllers/JournalController.php:1006
 * @route '/jurnal-transfer'
 */
 const transferForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -559,7 +559,7 @@ const transferForm = (options?: RouteQueryOptions): RouteFormDefinition<'get'> =
 
 /**
 * @see \App\Http\Controllers\JournalController::transfer
-* @see app/Http/Controllers/JournalController.php:1001
+* @see app/Http/Controllers/JournalController.php:1006
 * @route '/jurnal-transfer'
 */
 transferForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
@@ -569,7 +569,7 @@ transferForm.get = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => 
 
 /**
 * @see \App\Http\Controllers\JournalController::transfer
-* @see app/Http/Controllers/JournalController.php:1001
+* @see app/Http/Controllers/JournalController.php:1006
 * @route '/jurnal-transfer'
 */
 transferForm.head = (options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
