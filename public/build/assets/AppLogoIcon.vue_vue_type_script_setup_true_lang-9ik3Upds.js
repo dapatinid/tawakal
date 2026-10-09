@@ -1,0 +1,1 @@
+import{d as e,o,c as t}from"./app-C7FPmgCB.js";const n={src:"/apple-touch-icon.png",alt:""},p=e({inheritAttrs:!1,__name:"AppLogoIcon",props:{className:{type:[Boolean,null,String,Object,Array]}},setup(c){return(r,s)=>(o(),t("img",n))}});export{p as _};

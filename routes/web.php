@@ -6,6 +6,8 @@ use App\Models\Partner;
 
 use App\Http\Controllers\Admin\PartnerAdminController;
 use App\Http\Controllers\Admin\BranchAdminController;
+use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UserAdminController;
 use App\Http\Controllers\AsetTetapController;
 use App\Http\Controllers\QuestionerController;
@@ -159,6 +161,20 @@ Route::group(['middleware' => ['auth', 'verified', 'is_active', 'profile.complet
         Route::get('jurnal-transfer/{journal}/edit', [JournalController::class, 'editTransfer'])->name('jurnal.transfer.edit');
         Route::put('jurnal-transfer/{journal}', [JournalController::class, 'updateTransfer'])->name('jurnal.transfer.update');
         Route::delete('jurnal-transfer/{journal}', [JournalController::class, 'destroyTransfer'])->name('jurnal.transfer.destroy');
+
+        // CRUD Customer
+        Route::get('admin/customer', [CustomerController::class, 'index'])->name('admin.customer.index');
+        Route::get('admin/customer/create', [CustomerController::class, 'create'])->name('admin.customer.create');
+        Route::post('admin/customer', [CustomerController::class, 'store'])->name('admin.customer.store');
+        Route::get('admin/customer/{user}/edit', [CustomerController::class, 'edit'])->name('admin.customer.edit');
+        Route::put('admin/customer/{user}', [CustomerController::class, 'update'])->name('admin.customer.update');
+
+        // CRUD Supplier
+        Route::get('admin/supplier', [SupplierController::class, 'index'])->name('admin.supplier.index');
+        Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('admin.supplier.create');
+        Route::post('admin/supplier', [SupplierController::class, 'store'])->name('admin.supplier.store');
+        Route::get('admin/supplier/{user}/edit', [SupplierController::class, 'edit'])->name('admin.supplier.edit');
+        Route::put('admin/supplier/{user}', [SupplierController::class, 'update'])->name('admin.supplier.update');        
 
         Route::middleware('control.panel')->group(function () {
             // OWNER / ADMIN CABANG

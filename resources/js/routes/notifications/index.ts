@@ -85,7 +85,7 @@ index.form = indexForm
 * @see app/Http/Controllers/NotificationController.php:37
 * @route '/notifications/{notification}/read'
 */
-export const read = (args: { notification: string | number | { id: string | number } } | [notification: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+export const read = (args: { notification: number | { id: number } } | [notification: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: read.url(args, options),
     method: 'patch',
 })
@@ -100,7 +100,7 @@ read.definition = {
 * @see app/Http/Controllers/NotificationController.php:37
 * @route '/notifications/{notification}/read'
 */
-read.url = (args: { notification: string | number | { id: string | number } } | [notification: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+read.url = (args: { notification: number | { id: number } } | [notification: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { notification: args }
     }
@@ -133,7 +133,7 @@ read.url = (args: { notification: string | number | { id: string | number } } | 
 * @see app/Http/Controllers/NotificationController.php:37
 * @route '/notifications/{notification}/read'
 */
-read.patch = (args: { notification: string | number | { id: string | number } } | [notification: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
+read.patch = (args: { notification: number | { id: number } } | [notification: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'patch'> => ({
     url: read.url(args, options),
     method: 'patch',
 })
@@ -143,7 +143,7 @@ read.patch = (args: { notification: string | number | { id: string | number } } 
 * @see app/Http/Controllers/NotificationController.php:37
 * @route '/notifications/{notification}/read'
 */
-const readForm = (args: { notification: string | number | { id: string | number } } | [notification: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const readForm = (args: { notification: number | { id: number } } | [notification: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: read.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',
@@ -158,7 +158,7 @@ const readForm = (args: { notification: string | number | { id: string | number 
 * @see app/Http/Controllers/NotificationController.php:37
 * @route '/notifications/{notification}/read'
 */
-readForm.patch = (args: { notification: string | number | { id: string | number } } | [notification: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+readForm.patch = (args: { notification: number | { id: number } } | [notification: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: read.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'PATCH',

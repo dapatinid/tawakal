@@ -166,7 +166,7 @@ create.form = createForm
 * @see app/Http/Controllers/PenyesuaianStokController.php:842
 * @route '/penyesuaian-stok/{adjustmentStock}/print'
 */
-export const print = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const print = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: print.url(args, options),
     method: 'get',
 })
@@ -181,7 +181,7 @@ print.definition = {
 * @see app/Http/Controllers/PenyesuaianStokController.php:842
 * @route '/penyesuaian-stok/{adjustmentStock}/print'
 */
-print.url = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+print.url = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { adjustmentStock: args }
     }
@@ -214,7 +214,7 @@ print.url = (args: { adjustmentStock: string | number | { id: string | number } 
 * @see app/Http/Controllers/PenyesuaianStokController.php:842
 * @route '/penyesuaian-stok/{adjustmentStock}/print'
 */
-print.get = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+print.get = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: print.url(args, options),
     method: 'get',
 })
@@ -224,7 +224,7 @@ print.get = (args: { adjustmentStock: string | number | { id: string | number } 
 * @see app/Http/Controllers/PenyesuaianStokController.php:842
 * @route '/penyesuaian-stok/{adjustmentStock}/print'
 */
-print.head = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+print.head = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: print.url(args, options),
     method: 'head',
 })
@@ -234,7 +234,7 @@ print.head = (args: { adjustmentStock: string | number | { id: string | number }
 * @see app/Http/Controllers/PenyesuaianStokController.php:842
 * @route '/penyesuaian-stok/{adjustmentStock}/print'
 */
-const printForm = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const printForm = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: print.url(args, options),
     method: 'get',
 })
@@ -244,7 +244,7 @@ const printForm = (args: { adjustmentStock: string | number | { id: string | num
 * @see app/Http/Controllers/PenyesuaianStokController.php:842
 * @route '/penyesuaian-stok/{adjustmentStock}/print'
 */
-printForm.get = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+printForm.get = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: print.url(args, options),
     method: 'get',
 })
@@ -254,7 +254,7 @@ printForm.get = (args: { adjustmentStock: string | number | { id: string | numbe
 * @see app/Http/Controllers/PenyesuaianStokController.php:842
 * @route '/penyesuaian-stok/{adjustmentStock}/print'
 */
-printForm.head = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+printForm.head = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: print.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -271,7 +271,7 @@ print.form = printForm
 * @see app/Http/Controllers/PenyesuaianStokController.php:851
 * @route '/penyesuaian-stok/{adjustmentStock}/print-surat-jalan'
 */
-export const printSuratJalan = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const printSuratJalan = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: printSuratJalan.url(args, options),
     method: 'get',
 })
@@ -286,7 +286,7 @@ printSuratJalan.definition = {
 * @see app/Http/Controllers/PenyesuaianStokController.php:851
 * @route '/penyesuaian-stok/{adjustmentStock}/print-surat-jalan'
 */
-printSuratJalan.url = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+printSuratJalan.url = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { adjustmentStock: args }
     }
@@ -319,7 +319,7 @@ printSuratJalan.url = (args: { adjustmentStock: string | number | { id: string |
 * @see app/Http/Controllers/PenyesuaianStokController.php:851
 * @route '/penyesuaian-stok/{adjustmentStock}/print-surat-jalan'
 */
-printSuratJalan.get = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+printSuratJalan.get = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: printSuratJalan.url(args, options),
     method: 'get',
 })
@@ -329,7 +329,7 @@ printSuratJalan.get = (args: { adjustmentStock: string | number | { id: string |
 * @see app/Http/Controllers/PenyesuaianStokController.php:851
 * @route '/penyesuaian-stok/{adjustmentStock}/print-surat-jalan'
 */
-printSuratJalan.head = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+printSuratJalan.head = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: printSuratJalan.url(args, options),
     method: 'head',
 })
@@ -339,7 +339,7 @@ printSuratJalan.head = (args: { adjustmentStock: string | number | { id: string 
 * @see app/Http/Controllers/PenyesuaianStokController.php:851
 * @route '/penyesuaian-stok/{adjustmentStock}/print-surat-jalan'
 */
-const printSuratJalanForm = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const printSuratJalanForm = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: printSuratJalan.url(args, options),
     method: 'get',
 })
@@ -349,7 +349,7 @@ const printSuratJalanForm = (args: { adjustmentStock: string | number | { id: st
 * @see app/Http/Controllers/PenyesuaianStokController.php:851
 * @route '/penyesuaian-stok/{adjustmentStock}/print-surat-jalan'
 */
-printSuratJalanForm.get = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+printSuratJalanForm.get = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: printSuratJalan.url(args, options),
     method: 'get',
 })
@@ -359,7 +359,7 @@ printSuratJalanForm.get = (args: { adjustmentStock: string | number | { id: stri
 * @see app/Http/Controllers/PenyesuaianStokController.php:851
 * @route '/penyesuaian-stok/{adjustmentStock}/print-surat-jalan'
 */
-printSuratJalanForm.head = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+printSuratJalanForm.head = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: printSuratJalan.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -432,7 +432,7 @@ store.form = storeForm
 * @see app/Http/Controllers/PenyesuaianStokController.php:324
 * @route '/penyesuaian-stok/{adjustmentStock}/edit'
 */
-export const edit = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+export const edit = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -447,7 +447,7 @@ edit.definition = {
 * @see app/Http/Controllers/PenyesuaianStokController.php:324
 * @route '/penyesuaian-stok/{adjustmentStock}/edit'
 */
-edit.url = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+edit.url = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { adjustmentStock: args }
     }
@@ -480,7 +480,7 @@ edit.url = (args: { adjustmentStock: string | number | { id: string | number } }
 * @see app/Http/Controllers/PenyesuaianStokController.php:324
 * @route '/penyesuaian-stok/{adjustmentStock}/edit'
 */
-edit.get = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
+edit.get = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'get'> => ({
     url: edit.url(args, options),
     method: 'get',
 })
@@ -490,7 +490,7 @@ edit.get = (args: { adjustmentStock: string | number | { id: string | number } }
 * @see app/Http/Controllers/PenyesuaianStokController.php:324
 * @route '/penyesuaian-stok/{adjustmentStock}/edit'
 */
-edit.head = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
+edit.head = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'head'> => ({
     url: edit.url(args, options),
     method: 'head',
 })
@@ -500,7 +500,7 @@ edit.head = (args: { adjustmentStock: string | number | { id: string | number } 
 * @see app/Http/Controllers/PenyesuaianStokController.php:324
 * @route '/penyesuaian-stok/{adjustmentStock}/edit'
 */
-const editForm = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+const editForm = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -510,7 +510,7 @@ const editForm = (args: { adjustmentStock: string | number | { id: string | numb
 * @see app/Http/Controllers/PenyesuaianStokController.php:324
 * @route '/penyesuaian-stok/{adjustmentStock}/edit'
 */
-editForm.get = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.get = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, options),
     method: 'get',
 })
@@ -520,7 +520,7 @@ editForm.get = (args: { adjustmentStock: string | number | { id: string | number
 * @see app/Http/Controllers/PenyesuaianStokController.php:324
 * @route '/penyesuaian-stok/{adjustmentStock}/edit'
 */
-editForm.head = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
+editForm.head = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'get'> => ({
     action: edit.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'HEAD',
@@ -621,7 +621,7 @@ update.form = updateForm
 * @see app/Http/Controllers/PenyesuaianStokController.php:578
 * @route '/penyesuaian-stok/{adjustmentStock}'
 */
-export const destroy = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+export const destroy = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -636,7 +636,7 @@ destroy.definition = {
 * @see app/Http/Controllers/PenyesuaianStokController.php:578
 * @route '/penyesuaian-stok/{adjustmentStock}'
 */
-destroy.url = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions) => {
+destroy.url = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions) => {
     if (typeof args === 'string' || typeof args === 'number') {
         args = { adjustmentStock: args }
     }
@@ -669,7 +669,7 @@ destroy.url = (args: { adjustmentStock: string | number | { id: string | number 
 * @see app/Http/Controllers/PenyesuaianStokController.php:578
 * @route '/penyesuaian-stok/{adjustmentStock}'
 */
-destroy.delete = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
+destroy.delete = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteDefinition<'delete'> => ({
     url: destroy.url(args, options),
     method: 'delete',
 })
@@ -679,7 +679,7 @@ destroy.delete = (args: { adjustmentStock: string | number | { id: string | numb
 * @see app/Http/Controllers/PenyesuaianStokController.php:578
 * @route '/penyesuaian-stok/{adjustmentStock}'
 */
-const destroyForm = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+const destroyForm = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',
@@ -694,7 +694,7 @@ const destroyForm = (args: { adjustmentStock: string | number | { id: string | n
 * @see app/Http/Controllers/PenyesuaianStokController.php:578
 * @route '/penyesuaian-stok/{adjustmentStock}'
 */
-destroyForm.delete = (args: { adjustmentStock: string | number | { id: string | number } } | [adjustmentStock: string | number | { id: string | number } ] | string | number | { id: string | number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
+destroyForm.delete = (args: { adjustmentStock: number | { id: number } } | [adjustmentStock: number | { id: number } ] | number | { id: number }, options?: RouteQueryOptions): RouteFormDefinition<'post'> => ({
     action: destroy.url(args, {
         [options?.mergeQuery ? 'mergeQuery' : 'query']: {
             _method: 'DELETE',

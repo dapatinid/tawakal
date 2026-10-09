@@ -10,7 +10,7 @@ import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, Sid
 import { dashboard } from '@/routes';
 import { type NavItem } from '@/types';
 import { usePage } from '@inertiajs/vue3';
-import { LayoutGrid, Bookmark, Box, Monitor, House, Blocks, ClipboardList, Wallet, Notebook, ChartNoAxesCombined, Scale, Handshake, Waypoints, UsersRound, ShoppingBasket, NotepadText, Computer, Receipt, ScrollText, Grid2x2X, Building2, Store } from 'lucide-vue-next';
+import { LayoutGrid, Bookmark, Box, Monitor, House, Blocks, ClipboardList, Wallet, Notebook, ChartNoAxesCombined, Scale, Handshake, Waypoints, UsersRound, ShoppingBasket, NotepadText, Computer, Receipt, ScrollText, Grid2x2X, Building2, Store, Contact, UserCheck } from 'lucide-vue-next';
 import AppLogo from './AppLogo.vue';
 import { computed } from 'vue';
 
@@ -110,11 +110,12 @@ const mainNavItemsStockpile = computed<NavItem[]>(() => {
 const mainNavItemsControl = computed<NavItem[]>(() => {
  
     const items: NavItem[] = [
-        // bisa tambahkan untuk umum
+            { title: 'Customer', href: '/admin/customer', icon: Contact, count: 0 },
     ];
 
     if (user?.is_admin && user?.level != null) {
         items.push(
+            { title: 'Supplier', href: '/admin/supplier', icon: UserCheck, count: 0 },
             { title: 'Pengguna', href: '/admin/pengguna', icon: UsersRound, count: 0 },
             { title: 'Cabang', href: '/admin/cabang', icon: Waypoints, count: 0 },
         );
@@ -167,7 +168,7 @@ const footerNavItems = computed<NavItem[]>(() => {
             <NavMainHistory v-if="user?.is_admin" :items="mainNavItemsHistory" :class="'relative z-3'"/>
             <NavMainAccounting v-if="user?.is_admin" :items="mainNavItemsAccounting" :class="'relative z-2'"/>
             <NavMainStockpile v-if="user?.is_admin" :items="mainNavItemsStockpile" :class="'relative z-1'"/>
-            <NavMainControl v-if="user?.is_admin && user?.level != null" :items="mainNavItemsControl" />
+            <NavMainControl v-if="user?.is_admin" :items="mainNavItemsControl" />
         </SidebarContent>
 
         <div class="border-t border-zinc-300 dark:border-zinc-700"></div>

@@ -16,11 +16,11 @@ import StokController from './StokController'
 import ReturController from './ReturController'
 import PembayaranController from './PembayaranController'
 import JournalController from './JournalController'
+import Admin from './Admin'
 import AsetTetapController from './AsetTetapController'
 import ProfitLossController from './ProfitLossController'
 import BalanceController from './BalanceController'
 import CabangController from './CabangController'
-import Admin from './Admin'
 import Settings from './Settings'
 import Auth from './Auth'
 
@@ -43,11 +43,11 @@ const Controllers = {
     ReturController: Object.assign(ReturController, ReturController),
     PembayaranController: Object.assign(PembayaranController, PembayaranController),
     JournalController: Object.assign(JournalController, JournalController),
+    Admin: Object.assign(Admin, Admin),
     AsetTetapController: Object.assign(AsetTetapController, AsetTetapController),
     ProfitLossController: Object.assign(ProfitLossController, ProfitLossController),
     BalanceController: Object.assign(BalanceController, BalanceController),
     CabangController: Object.assign(CabangController, CabangController),
-    Admin: Object.assign(Admin, Admin),
     Settings: Object.assign(Settings, Settings),
     Auth: Object.assign(Auth, Auth),
 }
