@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue'
 import { Head, router, usePage } from '@inertiajs/vue3'
-import { type BreadcrumbItem } from '@/types'
 import { ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -10,6 +9,11 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import SearchableSelect from '@/components/SearchableSelect.vue'
 import SearchableSelectDependent from '@/components/SearchableSelectDependent.vue'
 import { Plus } from 'lucide-vue-next'
+import { type BreadcrumbItem } from '@/types'
+
+const breadcrumbs: BreadcrumbItem[] = [
+  { title: 'Tambah Supplier', href: `` },
+];
 
 const props = defineProps<{
   branches: Array<{ value: string; label: string }>,
@@ -162,7 +166,7 @@ function removeUserEndClassTag(tag: string) {
 
 <template>
   <Head title="Tambah Supplier"/>
-  <AppLayout>
+  <AppLayout :breadcrumbs="breadcrumbs">
     <div class="p-6 space-y-6 max-w-6xl mx-auto">
 
       <!-- MEDIA -->
@@ -263,7 +267,7 @@ function removeUserEndClassTag(tag: string) {
                 @click="toggleUserEndClass('customer')"
                 class="flex-1"
               >
-                + Customer
+                Customer
               </Button>
               <Button 
                 type="button" 
@@ -271,7 +275,7 @@ function removeUserEndClassTag(tag: string) {
                 @click="toggleUserEndClass('supplier')"
                 class="flex-1"
               >
-                + Supplier
+                Supplier
               </Button>
             </div>
             

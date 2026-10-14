@@ -10,6 +10,11 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import SearchableSelect from '@/components/SearchableSelect.vue';
 import SearchableSelectDependent from '@/components/SearchableSelectDependent.vue';
 import { Plus } from 'lucide-vue-next';
+import { type BreadcrumbItem } from '@/types';
+
+const breadcrumbs: BreadcrumbItem[] = [
+  { title: 'Edit Pengguna', href: `` },
+];
 
 const props = defineProps<{
   user: any;
@@ -163,34 +168,34 @@ function submit() {
   });
 }
 
-// ================= TAG INPUT (KELAS) =================
-const userEndClassInput = ref('');
-const userEndClassTags = ref<string[]>([]);
+// ================= KELAS IDENTITAS (Toggle) =================
+const userEndClassTags = ref<string[]>([])
 
-if (form.value.class) {
-  userEndClassTags.value = form.value.class.split(',').map(s => s.trim());
+// 1. Parsing data dari database saat halaman Edit dimuat
+if (props.user.class) {
+  userEndClassTags.value = props.user.class
+    .split(',')
+    .map(s => s.trim().toLowerCase()) // Pastikan jadi huruf kecil semua agar terbaca oleh tombol
+    .filter(Boolean) // Buang elemen kosong
 }
 
-function addUserEndClassTag() {
-  const value = userEndClassInput.value
-    .toString()
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-z0-9\-]/g, '')
-    .replace(/\-+/g, '-');
-    
-  if (!value) return;
-  if (!userEndClassTags.value.includes(value)) {
-    userEndClassTags.value.push(value);
+// 2. Fungsi Toggle
+function toggleUserEndClass(role: string) {
+  if (userEndClassTags.value.includes(role)) {
+    // Jika sudah ada, hapus
+    userEndClassTags.value = userEndClassTags.value.filter(t => t !== role)
+  } else {
+    // Jika belum ada, tambahkan
+    userEndClassTags.value.push(role)
   }
-  userEndClassInput.value = '';
-  form.value.class = userEndClassTags.value.join(', ');
+  
+  // Update form.class dengan string yang dipisahkan koma
+  form.value.class = userEndClassTags.value.join(', ')
 }
 
 function removeUserEndClassTag(tag: string) {
-  userEndClassTags.value = userEndClassTags.value.filter(t => t !== tag);
-  form.value.class = userEndClassTags.value.join(', ');
+  userEndClassTags.value = userEndClassTags.value.filter(t => t !== tag)
+  form.value.class = userEndClassTags.value.join(', ')
 }
 
 // // Global flash messaging bridge
@@ -203,7 +208,7 @@ function removeUserEndClassTag(tag: string) {
 
 <template>
   <Head title="Edit Pengguna"/>
-  <AppLayout>
+  <AppLayout :breadcrumbs="breadcrumbs">
     <div class="p-6 space-y-6 max-w-6xl mx-auto">
 
       <Card>
@@ -287,24 +292,55 @@ function removeUserEndClassTag(tag: string) {
       <Card>
         <CardHeader><CardTitle>Permission & Kelas</CardTitle></CardHeader>
         <CardContent class="grid md:grid-cols-2 gap-6">
-          <div class="space-y-2">
-            <Label>Kelas</Label>
-            <div class="flex flex-wrap gap-2 mb-2">
-              <span v-for="tag in userEndClassTags" :key="tag" class="bg-blue-100 text-blue-800 px-2 py-1 rounded flex items-center gap-1 text-sm">
+          <div class="w-full md:w-1/2">
+            <Label class="mb-2 block">Pilih Kelas</Label>
+            
+            <!-- Area Daftar Tag yang Sedang Aktif -->
+            <div class="hidden flex flex-wrap gap-2 mb-3 min-h-[32px]">
+              <span 
+                v-for="tag in userEndClassTags" 
+                :key="tag" 
+                class="bg-blue-100 text-blue-800 px-2 py-1 rounded flex items-center gap-1 text-sm capitalize"
+              >
                 {{ tag }}
                 <button type="button" @click="removeUserEndClassTag(tag)" class="text-red-500 hover:text-red-700">✕</button>
               </span>
+              <span v-if="userEndClassTags.length === 0" class="text-sm text-gray-400 italic py-1">
+                Belum ada kelas yang dipilih.
+              </span>
             </div>
 
+            <!-- Tombol Toggle Pilihan Dropdown/Kategori -->
             <div class="flex gap-2">
-              <div class="relative flex-1">
-                <Input v-model="userEndClassInput" placeholder="Ketik nama kelas..." @keyup.enter.prevent="addUserEndClassTag"/>
-              </div>
-              <Button type="button" variant="secondary" @click="addUserEndClassTag" class="shrink-0">
-                <Plus class="size-4"/>
+              <Button 
+                type="button" 
+                :variant="userEndClassTags.includes('kasir') ? 'default' : 'outline'" 
+                @click="toggleUserEndClass('kasir')"
+                class="flex-1"
+              >
+                Kasir
+              </Button>
+              <Button 
+                type="button" 
+                :variant="userEndClassTags.includes('customer') ? 'default' : 'outline'" 
+                @click="toggleUserEndClass('customer')"
+                class="flex-1"
+              >
+                Customer
+              </Button>
+              <Button 
+                type="button" 
+                :variant="userEndClassTags.includes('supplier') ? 'default' : 'outline'" 
+                @click="toggleUserEndClass('supplier')"
+                class="flex-1"
+              >
+                Supplier
               </Button>
             </div>
-            <p class="text-[10px] text-muted-foreground mt-1">*Gunakan tombol Tambah jika keyboard tidak muncul Enter</p>
+            
+            <p class="text-[10px] text-muted-foreground mt-2 italic">
+              *Klik tombol di atas untuk role permission.
+            </p>
           </div>
 
           <div class="space-y-2">

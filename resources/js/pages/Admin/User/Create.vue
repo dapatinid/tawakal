@@ -1,171 +1,203 @@
 <script setup lang="ts">
 import AppLayout from '@/layouts/AppLayout.vue'
-import { Head, router, usePage } from '@inertiajs/vue3'
-import { ref, watch } from 'vue'
+import { Head, router, useForm } from '@inertiajs/vue3'
+import { nextTick, onBeforeUnmount, ref, watch } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
-import SearchableSelect from '@/components/SearchableSelect.vue'
 import SearchableSelectDependent from '@/components/SearchableSelectDependent.vue'
-import { Plus } from 'lucide-vue-next'
+import { type BreadcrumbItem } from '@/types'
+
+type Option = { value: string; label: string }
+
+const breadcrumbs: BreadcrumbItem[] = [
+  { title: 'Pengguna', href: '/admin/pengguna' },
+  { title: 'Tambah Pengguna', href: '/admin/pengguna/create' },
+]
 
 const props = defineProps<{
-  branches: Array<{ value: string; label: string }>,
-  provinces: Array<{ value: string; label: string }>,
-  cities?: Array<{ value: string; label: string }>,
-  districts?: Array<{ value: string; label: string }>,
-  villages?: Array<{ value: string; label: string }>
+  branches: Option[]
+  provinces: Option[]
+  cities?: Option[]
+  districts?: Option[]
+  villages?: Option[]
 }>()
 
-// ================= DATA =================
-const form = ref({
+// ================= BATAS FILE (samakan dengan validasi di controller) =================
+const MAX_AVATAR_KB = 2048
+const MAX_COVER_KB = 4096
+
+// ================= FORM =================
+const form = useForm({
   name: '',
   email: '',
   username: '',
   phone: '',
   password: '',
   is_active: true,
-  is_admin: false,
-  level: '',
   class: '',
-  branch_id: null,
+  branch_id: null as string | null,
   street_address: '',
   zip_code: '',
   rute: '',
-  province_code: null,
-  city_code: null,
-  district_code: null,
-  village_code: null,
+  province_code: null as string | null,
+  city_code: null as string | null,
+  district_code: null as string | null,
+  village_code: null as string | null,
   avatar: null as File | null,
-  cover: null as File | null
+  cover: null as File | null,
 })
 
 // ================= LISTS =================
-const branches = ref(props.branches ?? [])
-const provinces = ref(props.provinces ?? [])
-const cities = ref(props.cities ?? [])
-const districts = ref(props.districts ?? [])
-const villages = ref(props.villages ?? [])
+const cities = ref<Option[]>(props.cities ?? [])
+const districts = ref<Option[]>(props.districts ?? [])
+const villages = ref<Option[]>(props.villages ?? [])
 
 // ================= MEDIA PREVIEW =================
-const avatarPreview = ref(null)
-const coverPreview = ref(null)
+const avatarPreview = ref<string | null>(null)
+const coverPreview = ref<string | null>(null)
 
-function onAvatarChange(e: Event) {
-  const f = (e.target as HTMLInputElement).files?.[0]
-  if (!f) return
-  form.value.avatar = f
-  avatarPreview.value = URL.createObjectURL(f)
+function setPreview(target: typeof avatarPreview, file: File | null) {
+  if (target.value) URL.revokeObjectURL(target.value)
+  target.value = file ? URL.createObjectURL(file) : null
 }
 
-function onCoverChange(e: Event) {
-  const f = (e.target as HTMLInputElement).files?.[0]
-  if (!f) return
-  form.value.cover = f
-  coverPreview.value = URL.createObjectURL(f)
+function onFileChange(field: 'avatar' | 'cover', e: Event) {
+  const input = e.target as HTMLInputElement
+  const file = input.files?.[0] ?? null
+  const maxKb = field === 'avatar' ? MAX_AVATAR_KB : MAX_COVER_KB
+  const preview = field === 'avatar' ? avatarPreview : coverPreview
+
+  form.clearErrors(field)
+
+  if (!file) {
+    form[field] = null
+    setPreview(preview, null)
+    return
+  }
+
+  if (file.size > maxKb * 1024) {
+    form[field] = null
+    setPreview(preview, null)
+    input.value = ''
+    form.setError(field, `Ukuran file maksimal ${maxKb / 1024} MB.`)
+    return
+  }
+
+  form[field] = file
+  setPreview(preview, file)
 }
 
-// ================= CASCADE WATCHERS =================
-watch(() => form.value.province_code, () => {
-  form.value.city_code = null
-  form.value.district_code = null
-  form.value.village_code = null
+onBeforeUnmount(() => {
+  setPreview(avatarPreview, null)
+  setPreview(coverPreview, null)
+})
+
+// ================= CASCADE WILAYAH =================
+function loadRegion(
+  key: 'cities' | 'districts' | 'villages',
+  param: 'province_code' | 'city_code' | 'district_code',
+  parentValue: string,
+  stillValid: () => boolean,
+  assign: (items: Option[]) => void,
+) {
+  router.reload({
+    only: [key],
+    data: { [param]: parentValue },
+    preserveState: true,
+    preserveScroll: true,
+    replace: true,
+    onSuccess: (page) => {
+      // abaikan respons lama jika pilihan induk sudah berubah lagi
+      if (!stillValid()) return
+      assign((page.props[key] as Option[]) ?? [])
+    },
+  })
+}
+
+watch(() => form.province_code, (code) => {
+  form.city_code = null
+  form.district_code = null
+  form.village_code = null
   cities.value = []
   districts.value = []
   villages.value = []
-
-  if (!form.value.province_code) return
-  router.reload({
-    only: ['cities'],
-    data: { province_code: form.value.province_code },
-    onSuccess: page => { cities.value = page.props.cities ?? [] }
-  })
+  if (!code) return
+  loadRegion('cities', 'province_code', code, () => form.province_code === code, (v) => (cities.value = v))
 })
 
-watch(() => form.value.city_code, () => {
-  form.value.district_code = null
-  form.value.village_code = null
+watch(() => form.city_code, (code) => {
+  form.district_code = null
+  form.village_code = null
   districts.value = []
   villages.value = []
-
-  if (!form.value.city_code) return
-  router.reload({
-    only: ['districts'],
-    data: { city_code: form.value.city_code },
-    onSuccess: page => { districts.value = page.props.districts ?? [] }
-  })
+  if (!code) return
+  loadRegion('districts', 'city_code', code, () => form.city_code === code, (v) => (districts.value = v))
 })
 
-watch(() => form.value.district_code, () => {
-  form.value.village_code = null
+watch(() => form.district_code, (code) => {
+  form.village_code = null
   villages.value = []
-
-  if (!form.value.district_code) return
-  router.reload({
-    only: ['villages'],
-    data: { district_code: form.value.district_code },
-    onSuccess: page => { villages.value = page.props.villages ?? [] }
-  })
+  if (!code) return
+  loadRegion('villages', 'district_code', code, () => form.district_code === code, (v) => (villages.value = v))
 })
 
+// ================= USERNAME =================
 function generateSlugUsername() {
-  if (!form.value.username) return;
-  form.value.username = form.value.username
+  if (!form.username) return
+  form.username = form.username
     .toString()
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, '-')        // ganti spasi jadi dash
+    .replace(/\s+/g, '-')        // spasi jadi dash
     .replace(/[^a-z0-9\-]/g, '') // hapus karakter selain a-z, 0-9, -
-    .replace(/\-+/g, '-');       // ganti dash ganda jadi satu
+    .replace(/-+/g, '-')         // dash ganda jadi satu
+}
+
+// ================= KELAS (TOGGLE) =================
+const classTags = ref<string[]>([])
+
+function toggleClass(role: string) {
+  classTags.value = classTags.value.includes(role)
+    ? classTags.value.filter((t) => t !== role)
+    : [...classTags.value, role]
 }
 
 // ================= SUBMIT =================
 function submit() {
-  form.value.class = userEndClassTags.value.join(', ')
-  const fd = new FormData()
+  generateSlugUsername()
 
-  Object.entries(form.value).forEach(([k, v]) => {
-    if (v === null) return
-    fd.append(k, typeof v === 'boolean' ? (v ? '1' : '0') : v as any)
-  })
-
-  router.post(`/admin/pengguna`, fd, {
-    preserveScroll: true,
-  })
+  form
+    .transform((data) => ({
+      ...data,
+      class: classTags.value.join(', '),
+    }))
+    .post('/admin/pengguna', {
+      forceFormData: true, // wajib agar file avatar/cover terkirim
+      preserveScroll: true,
+      onError: async () => {
+        // gulir ke pesan error pertama
+        await nextTick()
+        document.querySelector('[data-error]')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      },
+    })
 }
-
-// ================= TAG INPUT =================
-const userEndClassInput = ref('')
-const userEndClassTags = ref<string[]>([])
-
-function addUserEndClassTag() {
-  const value = userEndClassInput.value
-      .toString()
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g, '-')        // ganti spasi jadi dash
-      .replace(/[^a-z0-9\-]/g, '') // hapus karakter selain a-z, 0-9, -
-      .replace(/\-+/g, '-');       // ganti dash ganda jadi satu
-  if (!value) return
-  if (!userEndClassTags.value.includes(value)) {
-    userEndClassTags.value.push(value)
-  }
-  userEndClassInput.value = ''
-  form.value.class = userEndClassTags.value.join(', ')
-}
-
-function removeUserEndClassTag(tag: string) {
-  userEndClassTags.value = userEndClassTags.value.filter(t => t !== tag)
-  form.value.class = userEndClassTags.value.join(', ')
-}
-
 </script>
 
 <template>
-  <Head title="Tambah Pengguna"/>
-  <AppLayout>
+  <Head title="Tambah Pengguna" />
+  <AppLayout :breadcrumbs="breadcrumbs">
     <div class="p-6 space-y-6 max-w-6xl mx-auto">
+
+      <!-- RINGKASAN ERROR -->
+      <div
+        v-if="form.hasErrors"
+        role="alert"
+        class="rounded-md border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700"
+      >
+        Pengguna belum bisa disimpan. Periksa isian yang ditandai merah di bawah.
+      </div>
 
       <!-- MEDIA -->
       <Card>
@@ -174,19 +206,23 @@ function removeUserEndClassTag(tag: string) {
           <div class="flex flex-col items-center gap-3">
             <Label>Avatar</Label>
             <div class="w-32 h-32 rounded-full border-2 border-dashed flex items-center justify-center overflow-hidden bg-muted">
-              <img v-if="avatarPreview" :src="'/storage/' + avatarPreview" class="w-full h-full object-cover"/>
+              <img v-if="avatarPreview" :src="avatarPreview" alt="Pratinjau avatar" class="w-full h-full object-cover" />
               <span v-else class="text-xs text-muted-foreground">No Image</span>
             </div>
-            <Input type="file" accept="image/*" class="w-40" @change="onAvatarChange"/>
+            <Input type="file" accept="image/*" class="w-40" @change="onFileChange('avatar', $event)" />
+            <p class="text-xs text-muted-foreground">Maks. 2 MB</p>
+            <p v-if="form.errors.avatar" data-error class="text-sm text-red-500">{{ form.errors.avatar }}</p>
           </div>
 
           <div class="flex flex-col gap-3">
             <Label>Cover</Label>
             <div class="w-full h-40 border-2 border-dashed rounded-md flex items-center justify-center overflow-hidden bg-muted">
-              <img v-if="coverPreview" :src="'/storage/' + coverPreview" class="w-full h-full object-cover"/>
+              <img v-if="coverPreview" :src="coverPreview" alt="Pratinjau cover" class="w-full h-full object-cover" />
               <span v-else class="text-xs text-muted-foreground">No Image</span>
             </div>
-            <Input type="file" accept="image/*" @change="onCoverChange"/>
+            <Input type="file" accept="image/*" @change="onFileChange('cover', $event)" />
+            <p class="text-xs text-muted-foreground">Maks. 4 MB</p>
+            <p v-if="form.errors.cover" data-error class="text-sm text-red-500">{{ form.errors.cover }}</p>
           </div>
         </CardContent>
       </Card>
@@ -195,11 +231,36 @@ function removeUserEndClassTag(tag: string) {
       <Card>
         <CardHeader><CardTitle>Info User</CardTitle></CardHeader>
         <CardContent class="grid md:grid-cols-2 gap-4">
-          <div><Label>Nama</Label><Input v-model="form.name"/></div>
-          <div><Label>Username</Label><Input v-model="form.username" @blur="generateSlugUsername"/></div>
-          <div><Label>Phone</Label><Input v-model="form.phone"/></div>
-          <div><Label>Email</Label><Input v-model="form.email"/></div>
-          <div><Label>Password</Label><Input type="password" v-model="form.password"/></div>
+          <div class="space-y-2">
+            <Label for="name">Nama</Label>
+            <Input id="name" v-model="form.name" autocomplete="off" />
+            <p v-if="form.errors.name" data-error class="text-sm text-red-500 mt-1">{{ form.errors.name }}</p>
+          </div>
+
+          <div class="space-y-2">
+            <Label for="username">Username</Label>
+            <Input id="username" v-model="form.username" autocomplete="off" @blur="generateSlugUsername" />
+            <p v-if="form.errors.username" data-error class="text-sm text-red-500 mt-1">{{ form.errors.username }}</p>
+          </div>
+
+          <div class="space-y-2">
+            <Label for="phone">Phone</Label>
+            <Input id="phone" v-model="form.phone" type="tel" maxlength="20" autocomplete="off" />
+            <p v-if="form.errors.phone" data-error class="text-sm text-red-500 mt-1">{{ form.errors.phone }}</p>
+          </div>
+
+          <div class="space-y-2">
+            <Label for="email">Email</Label>
+            <Input id="email" v-model="form.email" type="email" autocomplete="off" />
+            <p v-if="form.errors.email" data-error class="text-sm text-red-500 mt-1">{{ form.errors.email }}</p>
+          </div>
+
+          <div class="space-y-2">
+            <Label for="password">Password</Label>
+            <Input id="password" v-model="form.password" type="password" autocomplete="new-password" />
+            <p class="text-xs text-muted-foreground mt-1">Minimal 6 karakter</p>
+            <p v-if="form.errors.password" data-error class="text-sm text-red-500 mt-1">{{ form.errors.password }}</p>
+          </div>
         </CardContent>
       </Card>
 
@@ -208,20 +269,46 @@ function removeUserEndClassTag(tag: string) {
         <CardHeader><CardTitle>Alamat</CardTitle></CardHeader>
         <CardContent class="space-y-4">
           <div class="grid md:grid-cols-2 gap-4">
-            <SearchableSelectDependent v-model="form.province_code" :items="provinces" label="Provinsi"/>
-            <SearchableSelectDependent v-model="form.city_code" :items="cities" label="Kabupaten / Kota" :disabled="!form.province_code"/>
-            <SearchableSelectDependent v-model="form.district_code" :items="districts" label="Kecamatan" :disabled="!form.city_code"/>
-            <SearchableSelectDependent v-model="form.village_code" :items="villages" label="Desa" :disabled="!form.district_code"/>
+            <div>
+              <SearchableSelectDependent v-model="form.province_code" :items="props.provinces" label="Provinsi" />
+              <p v-if="form.errors.province_code" data-error class="text-sm text-red-500 mt-1">{{ form.errors.province_code }}</p>
+            </div>
+            <div>
+              <SearchableSelectDependent v-model="form.city_code" :items="cities" label="Kabupaten / Kota" :disabled="!form.province_code" />
+              <p v-if="form.errors.city_code" data-error class="text-sm text-red-500 mt-1">{{ form.errors.city_code }}</p>
+            </div>
+            <div>
+              <SearchableSelectDependent v-model="form.district_code" :items="districts" label="Kecamatan" :disabled="!form.city_code" />
+              <p v-if="form.errors.district_code" data-error class="text-sm text-red-500 mt-1">{{ form.errors.district_code }}</p>
+            </div>
+            <div>
+              <SearchableSelectDependent v-model="form.village_code" :items="villages" label="Desa" :disabled="!form.district_code" />
+              <p v-if="form.errors.village_code" data-error class="text-sm text-red-500 mt-1">{{ form.errors.village_code }}</p>
+            </div>
           </div>
 
-          <div>
-            <Label>Alamat Lengkap</Label>
-            <textarea v-model="form.street_address" rows="3" class="w-full border rounded px-3 py-2"/>
+          <div class="space-y-2">
+            <Label for="street_address">Alamat Lengkap</Label>
+            <textarea
+              id="street_address"
+              v-model="form.street_address"
+              rows="3"
+              class="w-full border rounded px-3 py-2"
+            />
+            <p v-if="form.errors.street_address" data-error class="text-sm text-red-500 mt-1">{{ form.errors.street_address }}</p>
           </div>
 
           <div class="grid md:grid-cols-2 gap-4">
-            <div><Label>Kode Pos</Label><Input v-model="form.zip_code"/></div>
-            <div><Label>Rute</Label><Input v-model="form.rute"/></div>
+            <div class="space-y-2">
+              <Label for="zip_code">Kode Pos</Label>
+              <Input id="zip_code" v-model="form.zip_code" maxlength="10" inputmode="numeric" />
+              <p v-if="form.errors.zip_code" data-error class="text-sm text-red-500 mt-1">{{ form.errors.zip_code }}</p>
+            </div>
+            <div class="space-y-2">
+              <Label for="rute">Rute</Label>
+              <Input id="rute" v-model="form.rute" maxlength="100" />
+              <p v-if="form.errors.rute" data-error class="text-sm text-red-500 mt-1">{{ form.errors.rute }}</p>
+            </div>
           </div>
         </CardContent>
       </Card>
@@ -238,68 +325,56 @@ function removeUserEndClassTag(tag: string) {
       <!-- PERMISSION -->
       <Card>
         <CardHeader><CardTitle>Permission</CardTitle></CardHeader>
-        <CardContent class="grid md:grid-cols-2 gap-4">
+        <CardContent class="flex gap-4 flex-wrap">
           <div>
-            <Label class="mb-2 block">Kelas</Label>
-            
-            <!-- List Tag yang sudah ditambahkan -->
-            <div class="flex flex-wrap gap-2 mb-2">
-              <span 
-                v-for="tag in userEndClassTags" 
-                :key="tag" 
-                class="bg-blue-100 text-blue-800 px-2 py-1 rounded flex items-center gap-1 text-sm"
-              >
-                {{ tag }}
-                <button type="button" @click="removeUserEndClassTag(tag)" class="text-red-500 hover:text-red-700">✕</button>
-              </span>
-            </div>
-
-            <!-- Input Group dengan tombol Tambah (Enter) -->
+            <Label class="mb-2 block">Pilih Kelas</Label>
             <div class="flex gap-2">
-              <Input 
-                v-model="userEndClassInput" 
-                placeholder="Ketik nama kelas..." 
-                @keyup.enter.prevent="addUserEndClassTag"
+              <Button
+                type="button"
                 class="flex-1"
-              />
-              <Button 
-                type="button" 
-                variant="secondary" 
-                @click="addUserEndClassTag"
-                class="shrink-0"
+                :variant="classTags.includes('kasir') ? 'default' : 'outline'"
+                @click="toggleClass('kasir')"
               >
-                <Plus class="size-4"/>
+                Kasir
+              </Button>
+              <Button
+                type="button"
+                class="flex-1"
+                :variant="classTags.includes('customer') ? 'default' : 'outline'"
+                @click="toggleClass('customer')"
+              >
+                Customer
+              </Button>
+              <Button
+                type="button"
+                class="flex-1"
+                :variant="classTags.includes('supplier') ? 'default' : 'outline'"
+                @click="toggleClass('supplier')"
+              >
+                Supplier
               </Button>
             </div>
-            <p class="text-[10px] text-muted-foreground mt-1 italic">
-              *Tekan Tambah jika tombol Enter tidak muncul di keyboard HP.
+            <p class="text-xs text-muted-foreground mt-2">
+              Klik tombol untuk memilih atau membatalkan kelas. Bisa memilih lebih dari satu.
             </p>
+            <p v-if="form.errors.class" data-error class="text-sm text-red-500 mt-1">{{ form.errors.class }}</p>
           </div>
-
           <div>
-            <Label>Level</Label>
-            <select v-model="form.level" class="w-full border rounded px-3 py-2">
-              <option value="">- Pilih Level -</option>
-              <option value="Owner">Owner</option>
-              <option value="Admin">Admin</option>
-            </select>
-          </div>
-
-          <div class="flex gap-2 items-end">
-            <Button type="button" :variant="!form.is_admin ? 'default' : 'outline'" @click="form.is_admin = false">Tolak Izin</Button>
-            <Button type="button" :variant="form.is_admin ? 'default' : 'outline'" @click="form.is_admin = true">Ya, Izinkan</Button>
-          </div>
-
-          <div>
-            <Label>Cabang</Label>
-            <SearchableSelect v-model="form.branch_id" :items="branches" label="Cabang" value-key="value" label-key="label"/>
+            <Label class="mb-2 block">Penugasan di Cabang</Label>
+            <SearchableSelectDependent v-model="form.branch_id" :items="props.branches" label="Cabang" />
+            <p v-if="form.errors.branch_id" data-error class="text-sm text-red-500 mt-1">{{ form.errors.branch_id }}</p>
           </div>
         </CardContent>
       </Card>
 
       <!-- ACTION -->
-      <div class="flex justify-end">
-        <Button class="w-full md:w-auto" type="button" @click="submit">Simpan</Button>
+      <div class="flex justify-end gap-3">
+        <Button type="button" variant="outline" :disabled="form.processing" @click="router.visit('/admin/pengguna')">
+          Batal
+        </Button>
+        <Button class="w-full md:w-auto" type="button" :disabled="form.processing" @click="submit">
+          {{ form.processing ? 'Menyimpan...' : 'Simpan' }}
+        </Button>
       </div>
 
     </div>
